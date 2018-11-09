@@ -15,6 +15,16 @@ router.post('/post', (req, res) => {
   });
 });
 
+router.put('/post/:id', (req, res) => {
+  Post.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
+    if(err) {
+      res.send(err);
+    } else {
+      res.json(updatedPost);
+    }
+  });
+});
+
 router.delete('/post/:id', (req, res) => {
   Post.findByIdAndDelete(req.params.id, (err) => {
     if(err) {
@@ -25,9 +35,23 @@ router.delete('/post/:id', (req, res) => {
   });
 });
 
+router.get('/post/:id', (req, res) => {
+  Post.findById(req.params.id, (err, foundPost) => {
+    if(err) {
+      res.send(err);
+    } else {
+      res.json(foundPost);
+    }
+  });
+});
+
 router.get('/post', (req, res) => {
   Post.find((err, foundPosts) => {
-    res.json(foundPosts);
+    if(err){
+      res.send(err);
+    } else{
+      res.json(foundPosts);
+    }
   });
 });
 
