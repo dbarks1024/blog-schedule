@@ -8,9 +8,11 @@ router.post('/post', (req, res) => {
     date: req.body.date,
     description: req.body.description
   };
-  Post.create(newPost, (err) => {
+  Post.create(newPost, (err, newPost) => {
     if (err) {
       res.send(err);
+    } else {
+      res.json(newPost);
     }
   });
 });
@@ -60,5 +62,6 @@ router.get('/', function (req, res) {
     title: 'Express'
   });
 });
+
 
 module.exports = router;
