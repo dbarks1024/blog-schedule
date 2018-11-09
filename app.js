@@ -1,13 +1,13 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const mongoose = require('mongoose');
-const bodyParser = require("body-parser");
-var indexRouter = require('./routes/index');
+const express = require('express'),
+  path = require('path'),
+  cookieParser = require('cookie-parser'),
+  logger = require('morgan'),
+  mongoose = require('mongoose'),
+  bodyParser = require('body-parser'),
+  indexRouter = require('./routes/index');
 
 
-var databaseUrl = process.env.DATABASEURL || "mongodb://localhost/blog-schedule";
+var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/blog-schedule';
 
 
 var app = express();
