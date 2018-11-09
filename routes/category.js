@@ -3,26 +3,27 @@ const express = require('express'),
   Category = require('../models/category');
 
 router.post('/', (req, res) => {
-  const newPost = {
+  const newCategory = {
     name: req.body.name,
-    date: req.body.date,
-    description: req.body.description
   };
-  Category.create(newPost, (err, newPost) => {
+  Category.create(newCategory, (err, newCategory) => {
     if (err) {
       res.send(err);
     } else {
-      res.json(newPost);
+      res.json(newCategory);
     }
   });
 });
 
 router.put('/:id', (req, res) => {
-  Category.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
+  const updateData = {
+    name: req.body.name
+  };
+  Category.findByIdAndUpdate(req.params.id, updateData, (err) => {
     if(err) {
       res.send(err);
     } else {
-      res.json(updatedPost);
+      res.send('success');
     }
   });
 });
