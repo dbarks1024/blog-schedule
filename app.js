@@ -13,10 +13,10 @@ var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/blog-schedule'
 var app = express();
 require('dotenv').config();
 
-mongoose.connect(databaseUrl);
+mongoose.connect(databaseUrl, {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 app.use(logger('dev'));
 app.use(express.json());
