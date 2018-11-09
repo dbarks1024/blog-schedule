@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 
 var postSchema = new mongoose.Schema({
   name: String,
@@ -6,4 +6,4 @@ var postSchema = new mongoose.Schema({
   description: String,
 });
 
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model('Post', postSchema);

@@ -1,16 +1,15 @@
 const express = require('express'),
-      router = express.Router(),
-      Post = require('../models/posts');
+  router = express.Router(),
+  Post = require('../models/posts');
 
 router.post('/post', (req, res) => {
-  newPost = {
+  const newPost = {
     name: req.body.name,
     date: req.body.date,
     description: req.body.description
-  }
-  Post.create(newPost, (err, createdPost) => {
-    console.log(createdPost);
-    if(err) {
+  };
+  Post.create(newPost, (err) => {
+    if (err) {
       res.send(err);
     }
   });
@@ -19,11 +18,13 @@ router.post('/post', (req, res) => {
 router.get('/post', (req, res) => {
   Post.find((err, foundPosts) => {
     res.json(foundPosts);
-  })
+  });
 });
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res) {
+  res.render('index', {
+    title: 'Express'
+  });
 });
 
 module.exports = router;
