@@ -1,4 +1,5 @@
 const express = require('express'),
+  moment = require('moment'),
   router = express.Router(),
   Post = require('../models/posts');
 
@@ -18,11 +19,16 @@ router.post('/post', (req, res) => {
 });
 
 router.put('/post/:id', (req, res) => {
-  Post.findByIdAndUpdate(req.params.id, req.body.post, (err, updatedPost) => {
+  const updatedPostData = {
+    name: req.body.name,
+    date: moment(req.body.date),
+    description: req.body.description
+  };
+  Post.findByIdAndUpdate(req.params.id, updatedPostData, (err) => {
     if(err) {
       res.send(err);
     } else {
-      res.json(updatedPost);
+      res.send('success');
     }
   });
 });
