@@ -7,7 +7,8 @@ router.post('/post', (req, res) => {
   const newPost = {
     name: req.body.name,
     date: req.body.date,
-    description: req.body.description
+    description: req.body.description,
+    category: req.body.category,
   };
   Post.create(newPost, (err, newPost) => {
     if (err) {
@@ -22,7 +23,8 @@ router.put('/post/:id', (req, res) => {
   const updatedPostData = {
     name: req.body.name,
     date: moment(req.body.date),
-    description: req.body.description
+    description: req.body.description,
+    category: req.body.category,
   };
   Post.findByIdAndUpdate(req.params.id, updatedPostData, (err) => {
     if(err) {
