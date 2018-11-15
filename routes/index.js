@@ -66,9 +66,7 @@ router.get('/post', (req, res) => {
 });
 
 router.get('/', function (req, res) {
-  res.render('index', {
-    title: 'Express'
-  });
+  res.send('working');
 });
 
 
