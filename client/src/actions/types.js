@@ -1,1 +1,1 @@
-export const ALL_POSTS = 'all_blogs';
+export const ALL_POSTS = 'all_posts';

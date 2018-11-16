@@ -7,8 +7,10 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
    case ALL_POSTS:
+   console.log(action.payload);
     return {
-     result: action.payload
+      ...state, 
+     posts: action.payload
     }
    default:
     return state

@@ -1,13 +1,15 @@
-import axios from 'axios';
-import ALL_BLOGS from './types';
+import { ALL_POSTS } from './types';
 
-export const getAllPosts = (dispatch) => {
-  axios.get('/api/posts')
+export const getAllPosts = () => {
+  return (dispatch) => {
+    fetch('/api/post')
+    .then((response) => response.json())
     .then((response) => {
-      console.log(response.body);
+      console.log(response);
       dispatch({
-        payload: response.body,
-        type: ALL_BLOGS
+        payload: response,
+        type: ALL_POSTS
       })
     }) 
+  }
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import getAllPosts from '../actions/postActions';
-import { connect } from 'mongoose';
+import { Container, ListGroup, ListGroupItem } from 'reactstrap';
+import { connect } from 'react-redux';
+import { getAllPosts } from '../actions/postActions';
+
 
 class BlogList extends Component {
   state = { blogs: [] }
   
   componentDidMount() {
-    this.getAllPosts();
+    this.props.getAllPosts();
   }
 
   render() { 
@@ -23,5 +23,11 @@ class BlogList extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) =>{
+  return {
+    posts: state.postReducer.posts
+  };
+}
  
-export default connect({}, getAllPosts)(BlogList);
+export default connect(mapStateToProps, { getAllPosts })(BlogList);
