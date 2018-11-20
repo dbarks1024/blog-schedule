@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { connect } from 'react-redux';
+import { moment } from 'moment';
 import { getAllPosts } from '../actions/postActions';
 import "./BlogList.css";
 
