@@ -15,7 +15,7 @@ Data needed:
 | Name | Required | Type |
 | ----  | -------- | -----|
 | title | r | string |
-| date | r | date(YYYY-MM-DD) |
+| date | r | date(MM-DD-YYYY) |
 | description |  | String |
 | author |  | String |
 | status | r | String |
@@ -27,7 +27,7 @@ Data needed:
 | Name | Required | Type |
 | ----  | -------- | -----|
 | title | r | string |
-| date |  | date(YYYY-MM-DD) |
+| date |  | date(MM-DD-YYYY) |
 | description |  | String |
 | author |  | String |
 | status | r | String |
