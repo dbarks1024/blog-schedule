@@ -11,18 +11,38 @@ class BlogList extends Component {
     this.props.getAllPosts();
   }
 
+  listItemColor(status) {
+    switch (status) {
+      case 'Not Started':
+        return 'danger';
+      case 'Drafting':
+      case 'Review':
+        return 'warning';
+      case 'Ready': 
+        return 'success';
+      case 'Posted':
+        return 'info';
+      default: 
+        return '';
+    }
+  }
+
   render() { 
     return (  
       <Container>
         <ListGroup>
           {this.props.posts.map((item, index) => {
             return (
-            <ListGroupItem key={index} className='align-items-start flex-column'>
-                <div className='justify-content-between d-flex'>
-                  <ListGroupItemHeading>{item.name}</ListGroupItemHeading>
-                  <small>{item.date}</small>
-                </div>
-              <ListGroupItemText>{item.description}</ListGroupItemText>
+            <ListGroupItem color={this.listItemColor(item.status)} key={index} className='align-items-start flex-column'>
+              <div className='justify-content-between d-flex'>
+                <ListGroupItemHeading>{item.title}</ListGroupItemHeading>
+                <small>{item.date}</small>
+              </div>
+              <div className='justify-content-between d-flex'>
+                <ListGroupItemText>{item.description}</ListGroupItemText>
+                <p>{item.status}</p>
+              </div>
+
             </ListGroupItem>);
           })}
         </ListGroup>
