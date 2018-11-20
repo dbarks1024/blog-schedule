@@ -5,8 +5,6 @@ const express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
   indexRouter = require('./routes/index'),
-  categoryRouter = require('./routes/category');
-
 
 var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/blog-schedule';
 
@@ -26,6 +24,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
-app.use('/api/category', categoryRouter);
 
 module.exports = app;

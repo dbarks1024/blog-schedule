@@ -9,6 +9,8 @@ router.post('/post', (req, res) => {
     date: req.body.date,
     description: req.body.description,
     category: req.body.category,
+    status: req.body.status,
+    author: req.body.author,
   };
   Post.create(newPost, (err, newPost) => {
     if (err) {
@@ -25,6 +27,8 @@ router.put('/post/:id', (req, res) => {
     date: moment(req.body.date),
     description: req.body.description,
     category: req.body.category,
+    status: req.body.status,
+    author: req.body.author,
   };
   Post.findByIdAndUpdate(req.params.id, updatedPostData, (err) => {
     if(err) {
