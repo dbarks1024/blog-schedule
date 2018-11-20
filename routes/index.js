@@ -5,25 +5,30 @@ const express = require('express'),
 
 router.post('/post', (req, res) => {
   const newPost = {
-    name: req.body.name,
-    date: req.body.date,
+    title: req.body.title,
+    date: moment(req.body.date),
     description: req.body.description,
     category: req.body.category,
     status: req.body.status,
     author: req.body.author,
   };
-  Post.create(newPost, (err, newPost) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.json(newPost);
-    }
-  });
+  console.log(newPost);
+  if( newPost.title === undefined || newPost.status === undefined) {
+    res.send('Missing title or status');
+  } else {
+    Post.create(newPost, (err, newPost) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(newPost);
+      }
+    });
+  }
 });
 
 router.put('/post/:id', (req, res) => {
   const updatedPostData = {
-    name: req.body.name,
+    title: req.body.title,
     date: moment(req.body.date),
     description: req.body.description,
     category: req.body.category,

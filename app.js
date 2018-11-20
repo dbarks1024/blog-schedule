@@ -4,7 +4,7 @@ const express = require('express'),
   logger = require('morgan'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
-  indexRouter = require('./routes/index'),
+  indexRouter = require('./routes/index');
 
 var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/blog-schedule';
 
