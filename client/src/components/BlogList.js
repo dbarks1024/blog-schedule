@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem } from 'reactstrap';
+import { Container, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../actions/postActions';
-
+import "./BlogList.css";
 
 class BlogList extends Component {
   state = { blogs: [] }
@@ -15,9 +15,16 @@ class BlogList extends Component {
     return (  
       <Container>
         <ListGroup>
-          <ListGroupItem>
-            
-          </ListGroupItem>
+          {this.props.posts.map((item, index) => {
+            return (
+            <ListGroupItem key={index} className='align-items-start flex-column'>
+                <div className='justify-content-between d-flex'>
+                  <ListGroupItemHeading>{item.name}</ListGroupItemHeading>
+                  <small>{item.date}</small>
+                </div>
+              <ListGroupItemText>{item.description}</ListGroupItemText>
+            </ListGroupItem>);
+          })}
         </ListGroup>
       </Container>
     );
