@@ -12,7 +12,7 @@ router.post('/post', (req, res) => {
     status: req.body.status,
     author: req.body.author,
   };
-  if( newPost.title === undefined || newPost.status === undefined) {
+  if (newPost.title === undefined || newPost.status === undefined) {
     res.send('Missing title or status');
   } else {
     Post.create(newPost, (err, newPost) => {
@@ -34,8 +34,22 @@ router.put('/post/:id', (req, res) => {
     status: req.body.status,
     author: req.body.author,
   };
-  Post.findByIdAndUpdate(req.params.id, updatedPostData, (err) => {
-    if(err) {
+  if (updatedPostData.title === undefined || updatedPostData.status === undefined) {
+    res.send('Missing title or status');
+  } else {
+    Post.findByIdAndUpdate(req.params.id, updatedPostData, (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('success');
+      }
+    });
+  }
+});
+
+router.delete('/post/:id', (req, res) => {
+  Post.findByIdAndDelete(req.params.id, (err) => {
+    if (err) {
       res.send(err);
     } else {
       res.send('success');
@@ -43,19 +57,9 @@ router.put('/post/:id', (req, res) => {
   });
 });
 
-router.delete('/post/:id', (req, res) => {
-  Post.findByIdAndDelete(req.params.id, (err) => {
-    if(err) {
-      res.send(err);
-    } else{
-      res.send('success');
-    }
-  });
-});
-
 router.get('/post/:id', (req, res) => {
   Post.findById(req.params.id, (err, foundPost) => {
-    if(err) {
+    if (err) {
       res.send(err);
     } else {
       res.json(foundPost);
@@ -65,9 +69,9 @@ router.get('/post/:id', (req, res) => {
 
 router.get('/post', (req, res) => {
   Post.find((err, foundPosts) => {
-    if(err){
+    if (err) {
       res.send(err);
-    } else{
+    } else {
       res.json(foundPosts);
     }
   });
