@@ -12,7 +12,6 @@ router.post('/post', (req, res) => {
     status: req.body.status,
     author: req.body.author,
   };
-  console.log(newPost);
   if( newPost.title === undefined || newPost.status === undefined) {
     res.send('Missing title or status');
   } else {
