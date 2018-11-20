@@ -6,7 +6,7 @@ const express = require('express'),
 router.post('/post', (req, res) => {
   const newPost = {
     title: req.body.title,
-    date: moment(req.body.date),
+    date: moment(req.body.date, 'YYYY-MM-DD'),
     description: req.body.description,
     category: req.body.category,
     status: req.body.status,
@@ -28,7 +28,7 @@ router.post('/post', (req, res) => {
 router.put('/post/:id', (req, res) => {
   const updatedPostData = {
     title: req.body.title,
-    date: moment(req.body.date),
+    date: moment(req.body.date, 'YYYY-MM-DD'),
     description: req.body.description,
     category: req.body.category,
     status: req.body.status,
