@@ -5,19 +5,21 @@ import { setModalOpen } from '../actions/postActions';
 
 class EditPostModal extends Component {
   render() { 
+    const { title } = this.props.changePostData;
     return ( 
       <Modal isOpen={this.props.modalOpen}>
         <ModalHeader>Test</ModalHeader>
-        <ModalBody>Tesing modal body</ModalBody>
+        <ModalBody>{title}</ModalBody>
       </Modal>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  const { modalOpen } = state.postReducer
+  const { modalOpen, changePostData } = state.postReducer
   return {
-    modalOpen
+    modalOpen,
+    changePostData
   }
 }
  

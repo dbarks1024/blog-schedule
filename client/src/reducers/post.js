@@ -1,8 +1,9 @@
-import { ALL_POSTS, MODAL_OPEN } from '../actions/types';
+import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA } from '../actions/types';
 
 const INITIAL_STATE = {
   posts: [],
-  modalOpen: false
+  modalOpen: false,
+  changePostData: {},
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +17,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         modalOpen: action.payload
+      }
+    case CHANGE_POST_DATA:
+      return {
+        ...state,
+        changePostData: action.payload
       }
    default:
     return state

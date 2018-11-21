@@ -1,4 +1,4 @@
-import { ALL_POSTS, MODAL_OPEN } from './types';
+import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA } from './types';
 
 export const getAllPosts = () => {
   return (dispatch) => {
@@ -18,5 +18,12 @@ export const setModalOpen = (bool) => {
   return {
     type: MODAL_OPEN,
     payload: bool
+  }
+}
+
+export const changePostData = (post) => {
+  return {
+    type: CHANGE_POST_DATA,
+    payload: post
   }
 }

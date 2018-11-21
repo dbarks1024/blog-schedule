@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { setModalOpen, changePostData } from '../actions/postActions';
 import 'uiw-iconfont/fonts/w-icon.css'; 
 import "./BlogListItem.css";
 
@@ -30,7 +32,14 @@ class BlogListItem extends Component {
       className='align-items-start flex-column'
       >
         <div className='float-left'>
-          <i onClick={console.log('test')} className='w-icon-edit mt-auto mr-2'></i>
+          <i 
+          className='w-icon-edit mt-auto mr-2'
+          onClick={() => {
+            this.props.setModalOpen(true);
+            this.props.changePostData(item);
+            }
+          } 
+          ></i>
         </div>
         <div className='d-inline-block w-95'>
           <div className='justify-content-between d-flex'>
@@ -51,4 +60,4 @@ class BlogListItem extends Component {
   }
 }
  
-export default BlogListItem;
+export default connect(null, { setModalOpen, changePostData })(BlogListItem);
