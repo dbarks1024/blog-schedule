@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, ListGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../actions/postActions';
-import "./BlogList.css";
 import BlogListItem from './BlogListItem';
 
 class BlogList extends Component {
@@ -11,8 +10,6 @@ class BlogList extends Component {
   componentDidMount() {
     this.props.getAllPosts();
   }
-
-  
 
   render() { 
     return (  
