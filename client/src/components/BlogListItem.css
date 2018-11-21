@@ -16,3 +16,6 @@
 .w-icon-edit {
   cursor: pointer;
 }
+.w-icon-edit:hover {
+  opacity: .5;
+}

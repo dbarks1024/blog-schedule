@@ -29,7 +29,7 @@ class BlogListItem extends Component {
       key={this.props.index} 
       className='align-items-start flex-column'
       >
-        <div className='float-left '>
+        <div className='float-left'>
           <i onClick={console.log('test')} className='w-icon-edit mt-auto mr-2'></i>
         </div>
         <div className='d-inline-block w-95'>
