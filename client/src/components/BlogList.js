@@ -3,6 +3,7 @@ import { Container, ListGroup } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../actions/postActions';
 import BlogListItem from './BlogListItem';
+import EditPostModal from './EditPostModal';
 
 class BlogList extends Component {
   state = { blogs: [] }
@@ -14,6 +15,7 @@ class BlogList extends Component {
   render() { 
     return (  
       <Container>
+        <EditPostModal />
         <ListGroup>
           {this.props.posts.map((item, index) => <BlogListItem item={item} index={index} />)}
         </ListGroup>

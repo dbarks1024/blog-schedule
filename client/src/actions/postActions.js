@@ -1,4 +1,4 @@
-import { ALL_POSTS } from './types';
+import { ALL_POSTS, MODAL_OPEN } from './types';
 
 export const getAllPosts = () => {
   return (dispatch) => {
@@ -11,5 +11,12 @@ export const getAllPosts = () => {
         type: ALL_POSTS
       })
     }) 
+  }
+}
+
+export const setModalOpen = (bool) => {
+  return {
+    type: MODAL_OPEN,
+    payload: bool
   }
 }
