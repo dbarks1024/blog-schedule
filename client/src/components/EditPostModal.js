@@ -46,12 +46,12 @@ class EditPostModal extends Component {
               <Input type='text' id='title' name='title' value={this.props.title} onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
-              <Label for='date'>Date</Label>
-              <Input type='date' id='date' name='date' value={this.props.date} onChange={this.handleInputChange}></Input>
-            </FormGroup>
-            <FormGroup>
               <Label for='author'>Author</Label>
               <Input type='text' id='author' name='author' value={this.props.author} onChange={this.handleInputChange}></Input>
+            </FormGroup>
+            <FormGroup>
+              <Label for='date'>Date</Label>
+              <Input type='date' id='date' name='date' value={this.props.date} required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
               <Label for='status'>Status</Label>

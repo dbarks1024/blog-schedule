@@ -29,7 +29,6 @@ class BlogListItem extends Component {
     return (
       <ListGroupItem 
       color={this.listItemColor(item.status)} 
-      key={this.props.index} 
       className='align-items-start flex-column'
       >
         <div className='float-left'>

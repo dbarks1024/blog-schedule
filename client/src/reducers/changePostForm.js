@@ -24,6 +24,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         title: action.payload.title,
         author: action.payload.author,
+        date: action.payload.date,
         status: action.payload.status,
         category: action.payload.category,
         description: action.payload.description,
