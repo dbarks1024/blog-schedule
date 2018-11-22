@@ -13,7 +13,7 @@ export const changePostFormData = (post) => {
     type: CHANGE_POST_DATA,
     payload: post
   }
-}
+};
 
 export const changeTitle = (title) => {
   return {
@@ -23,39 +23,40 @@ export const changeTitle = (title) => {
 }
 
 export const changeDate = (date) => {
+  console.log(date);
   return {
     type: CHANGE_DATE,
     payload: date
   }
-}
+};
 
 export const changeAuthor = (author) => {
   return {
     type: CHANGE_AUTHOR,
     payload: author
   }
-}
+};
 
 export const changeStatus = (status) => {
   return {
     type: CHANGE_STATUS,
     payload: status
   }
-}
+};
 
 export const changeCategory = (category) => {
   return {
     type: CHANGE_CATEGORY,
     payload: category
   }
-}
+};
 
 export const changeDescription = (description) => {
   return {
     type: CHANGE_DESCRIPTION,
     payload: description
   }
-}
+};
 
 
 

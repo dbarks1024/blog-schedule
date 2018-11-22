@@ -10,10 +10,10 @@ class EditPostModal extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
-
     switch (name) {
       case 'title':
         this.props.changeTitle(value);
+        console.log('title switch');
         break;
       case 'author':
         this.props.changeAuthor(value);
@@ -33,7 +33,6 @@ class EditPostModal extends Component {
       default:
         break;
     }
-    this.props.changeTitle(value)
   }
   render() { 
     return ( 
