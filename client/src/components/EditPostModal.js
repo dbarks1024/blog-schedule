@@ -6,6 +6,11 @@ import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescript
 
 class EditPostModal extends Component {
 
+  handleModalClose = () => {
+    console.log(this.props.modalOpen);
+    this.props.setModalOpen(!this.props.modalOpen)
+  }
+
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -35,8 +40,9 @@ class EditPostModal extends Component {
     }
   }
   render() { 
+    const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.handleModalClose}>&times;</button>;
     return ( 
-      <Modal isOpen={this.props.modalOpen}>
+      <Modal isOpen={this.props.modalOpen} external={externalCloseBtn}>
         <ModalHeader>Test</ModalHeader>
         <ModalBody>
           <Form>
