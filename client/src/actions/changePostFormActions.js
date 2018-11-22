@@ -57,5 +57,30 @@ export const changeDescription = (description) => {
   }
 };
 
-
-
+export const submitPostForm = () => {
+  return (dispatch, getState) => {
+    const data = {
+      "title": getState().postForm.title,
+      "author": getState().postForm.author,
+      "date": getState().postForm.date,
+      "status": getState().postForm.status,
+      "category": getState().postForm.category,
+      "description": getState().postForm.description
+    };
+    console.log(JSON.stringify(data))
+    const id = getState().postForm.id;
+    fetch(`/api/post/${id}`, {
+      method: "PUT",
+      mode: "cors", 
+      "async": true,
+      "crossDomain": true,
+      cache: "no-cache", 
+      credentials: "same-origin",
+      headers: {
+          "Content-Type": "application/json; charset=utf-8"
+      }, // manual, *follow, error
+      body: JSON.stringify(data), // body data type must match "Content-Type" header
+  })
+  .then(response => console.log(response))
+  }
+}

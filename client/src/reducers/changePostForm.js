@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   status: '',
   category: '',
   description: '',
+  id: '',
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,6 +29,7 @@ export default (state = INITIAL_STATE, action) => {
         status: action.payload.status,
         category: action.payload.category,
         description: action.payload.description,
+        id: action.payload._id
       }
     case CHANGE_TITLE:
       return {

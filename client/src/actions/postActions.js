@@ -3,7 +3,7 @@ import moment from 'moment';
 
 export const getAllPosts = () => {
   return (dispatch) => {
-    fetch('/api/post')
+    fetch('/api/post', {cache: "no-cache"})
     .then((response) => response.json())
     .then((response) => {
       return response.map((post) => {

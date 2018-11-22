@@ -26,14 +26,17 @@ router.post('/post', (req, res) => {
 });
 
 router.put('/post/:id', (req, res) => {
+  const data = req.body;
   const updatedPostData = {
-    title: req.body.title,
-    date: moment(req.body.date, 'YYYY-MM-DD'),
-    description: req.body.description,
-    category: req.body.category,
-    status: req.body.status,
-    author: req.body.author,
+    title: data.title,
+    date: moment(data.date, 'YYYY-MM-DD'),
+    description: data.description,
+    category: data.category,
+    status: data.status,
+    author: data.author,
   };
+  console.log(req.body);
+  console.log(updatedPostData);
   if (updatedPostData.title === undefined || updatedPostData.status === undefined) {
     res.send('Missing title or status');
   } else {

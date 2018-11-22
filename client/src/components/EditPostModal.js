@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
-import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate } from '../actions/changePostFormActions';
+import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm } from '../actions/changePostFormActions';
 
 class EditPostModal extends Component {
 
   handleModalClose = () => {
-    console.log(this.props.modalOpen);
     this.props.setModalOpen(!this.props.modalOpen)
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    e.stopPropagation();
+    this.props.submitPostForm()
   }
 
   handleInputChange = (event) => {
@@ -18,7 +23,6 @@ class EditPostModal extends Component {
     switch (name) {
       case 'title':
         this.props.changeTitle(value);
-        console.log('title switch');
         break;
       case 'author':
         this.props.changeAuthor(value);
@@ -70,6 +74,7 @@ class EditPostModal extends Component {
               <Label for='description'>Description</Label>
               <Input type='text' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
+            <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
           </Form>
         </ModalBody>
       </Modal>
@@ -98,4 +103,6 @@ export default connect(mapStateToProps,
     changeStatus, 
     changeCategory, 
     changeDescription, 
-    changeDate })(EditPostModal);
+    changeDate,
+    submitPostForm
+   })(EditPostModal);
