@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import { setModalOpen, changePostData } from '../actions/postActions';
+import { setModalOpen } from '../actions/postActions';
+import { changePostFormData } from '../actions/changePostFormActions';
 import 'uiw-iconfont/fonts/w-icon.css'; 
 import "./BlogListItem.css";
 
@@ -36,7 +37,7 @@ class BlogListItem extends Component {
           className='w-icon-edit mt-auto mr-2'
           onClick={() => {
             this.props.setModalOpen(true);
-            this.props.changePostData(item);
+            this.props.changePostFormData(item);
             }
           } 
           ></i>
@@ -48,7 +49,7 @@ class BlogListItem extends Component {
           </div>
           <div className='author'> 
             <small className='pr-2'> by: {item.author}</small>
-            <btn className='btn btn-outline-primary btn-sm pt-0 pb-0'>{item.category}</btn>
+            <button className='btn btn-outline-primary btn-sm pt-0 pb-0'>{item.category}</button>
           </div>
           <div className='justify-content-between d-flex'>
             <ListGroupItemText>{item.description}</ListGroupItemText>
@@ -60,4 +61,4 @@ class BlogListItem extends Component {
   }
 }
  
-export default connect(null, { setModalOpen, changePostData })(BlogListItem);
+export default connect(null, { setModalOpen, changePostFormData })(BlogListItem);
