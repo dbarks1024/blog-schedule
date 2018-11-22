@@ -7,7 +7,7 @@ export const getAllPosts = () => {
     .then((response) => response.json())
     .then((response) => {
       return response.map((post) => {
-        post.date = moment(post.date).format('MM-DD-YYYY');
+        post.date = moment(post.date).format('YYYY-MM-DD');
         return post;
       });
     })
