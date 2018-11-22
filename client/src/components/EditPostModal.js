@@ -42,27 +42,27 @@ class EditPostModal extends Component {
           <Form>
             <FormGroup>
               <Label for='title'>Title</Label>
-              <Input type='text' id='title' name='title' value={this.props.title} onChange={this.handleInputChange}></Input>
+              <Input type='text' id='title' name='title' value={this.props.title} required onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
               <Label for='author'>Author</Label>
-              <Input type='text' id='author' name='author' value={this.props.author} onChange={this.handleInputChange}></Input>
+              <Input type='text' id='author' name='author' value={this.props.author} required onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
               <Label for='date'>Date</Label>
-              <Input type='date' id='date' name='date' value={this.props.date} required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" onChange={this.handleInputChange}></Input>
+              <Input type='date' id='date' name='date' value={this.props.date} required onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
               <Label for='status'>Status</Label>
-              <Input type='status' id='status' name='status' value={this.props.status} onChange={this.handleInputChange}></Input>
+              <Input type='status' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}></Input>
             </FormGroup>
             <FormGroup>
               <Label for='category'>Category</Label>
-              <Input type='text' id='category' name='category' value={this.props.category}onChange={this.handleInputChange} ></Input>
+              <Input type='text' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} ></Input>
             </FormGroup>
             <FormGroup>
               <Label for='description'>Description</Label>
-              <Input type='text' id='description' name='description' value={this.props.description} onChange={this.handleInputChange}></Input>
+              <Input type='text' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
           </Form>
         </ModalBody>
