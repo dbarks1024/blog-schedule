@@ -17,7 +17,7 @@ class BlogList extends Component {
       <Container>
         <EditPostModal />
         <ListGroup>
-          {this.props.posts.map((item, index) => <BlogListItem item={item} index={index} />)}
+          {this.props.posts.map((item, index) => <BlogListItem key={index} item={item} index={index} />)}
         </ListGroup>
       </Container>
     );
