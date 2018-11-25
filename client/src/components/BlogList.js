@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { Container, ListGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../actions/postActions';
-import "./BlogList.css";
+import { getAllPosts, setModalOpen } from '../actions/postActions';
+import BlogListItem from './BlogListItem';
+import EditPostModal from './EditPostModal';
 
 class BlogList extends Component {
   state = { blogs: [] }
@@ -14,17 +15,10 @@ class BlogList extends Component {
   render() { 
     return (  
       <Container>
+        <Button className='mb-3' onClick={this.props.setModalOpen}>New Post</Button>
+        <EditPostModal />
         <ListGroup>
-          {this.props.posts.map((item, index) => {
-            return (
-            <ListGroupItem key={index} className='align-items-start flex-column'>
-                <div className='justify-content-between d-flex'>
-                  <ListGroupItemHeading>{item.name}</ListGroupItemHeading>
-                  <small>{item.date}</small>
-                </div>
-              <ListGroupItemText>{item.description}</ListGroupItemText>
-            </ListGroupItem>);
-          })}
+          {this.props.posts.map((item, index) => <BlogListItem key={index} item={item}/>)}
         </ListGroup>
       </Container>
     );
@@ -37,4 +31,4 @@ const mapStateToProps = (state) =>{
   };
 }
  
-export default connect(mapStateToProps, { getAllPosts })(BlogList);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen })(BlogList);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavBar from './components/AppNavBar';
@@ -9,11 +10,13 @@ class App extends Component {
     return (
       <div className="App">
         <AppNavBar/>
-        <h1>hello</h1>
-        <BlogList/>
+        <div className='container'>
+          <BlogList/>
+        </div>
+        
       </div>
     );
   }
 }
 
-export default App;
+export default connect(null, {})(App);

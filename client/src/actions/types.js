@@ -1,1 +1,11 @@
 export const ALL_POSTS = 'all_posts';
+export const MODAL_OPEN = 'modal_open';
+export const CHANGE_TITLE = 'change_title';
+export const CHANGE_AUTHOR = 'change_author';
+export const CHANGE_DATE = 'change_date';
+export const CHANGE_DESCRIPTION = 'change_description';
+export const CHANGE_CATEGORY = 'change_category';
+export const CHANGE_STATUS = 'change_status';
+export const CHANGE_POST_DATA = 'change_post_data';
+export const FORM_LOADING = 'post_loading';
+export const CLEAR_FORM = 'clear_form';
