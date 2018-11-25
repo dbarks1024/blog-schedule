@@ -58,6 +58,7 @@ class EditPostModal extends Component {
     return ( 
       <Modal isOpen={this.props.modalOpen} external={externalCloseBtn}>
         <ModalHeader>Test</ModalHeader>
+        {externalCloseBtn}
         <ModalBody>
           <Form>
             <FormGroup>
