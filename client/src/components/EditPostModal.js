@@ -3,6 +3,7 @@ import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } 
 import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
 import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm } from '../actions/changePostFormActions';
+import LoadingSpinner from './spinner/LoadingSpinner';
 
 class EditPostModal extends Component {
 
@@ -46,7 +47,7 @@ class EditPostModal extends Component {
 
   isLoading = () => {
     if(this.props.loading) {
-      return 'spin';
+      return <LoadingSpinner />;
     }else {
       return 'Submit';
     }
