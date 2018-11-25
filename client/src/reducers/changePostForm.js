@@ -67,7 +67,7 @@ export default (state = INITIAL_STATE, action) => {
     case FORM_LOADING:
       return {
         ...state,
-        loading: true
+        loading: action.payload
       }
     case CLEAR_FORM:
       return {

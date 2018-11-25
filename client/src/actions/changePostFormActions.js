@@ -68,6 +68,13 @@ export const clearForm = () => {
   }
 }
 
+export const formLoading = (isLoading) => {
+  return {
+    type: FORM_LOADING,
+    payload: isLoading
+  }
+}
+
 export const submitPostForm = () => {
   return (dispatch, getState) => {
     const data = {
@@ -78,10 +85,7 @@ export const submitPostForm = () => {
       "category": getState().postForm.category,
       "description": getState().postForm.description
     };
-    dispatch({
-      type: FORM_LOADING,
-      payload: true
-    });
+    dispatch(formLoading(true));
     const id = getState().postForm.id;
     fetch(`/api/post/${id ? id : ''}`, {
       method: id ? "PUT" : "POST",
@@ -97,10 +101,7 @@ export const submitPostForm = () => {
   })
   .then(response => console.log(response))
   .then(() => {
-    dispatch({
-      type: FORM_LOADING,
-      payload: false
-    });
+    dispatch(formLoading(false));
     dispatch({
       type: MODAL_OPEN,
       payload: false
