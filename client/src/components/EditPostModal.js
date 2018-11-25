@@ -88,7 +88,7 @@ class EditPostModal extends Component {
             </FormGroup>
             <FormGroup>
               <Label for='description'>Description</Label>
-              <Input type='text' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
+              <Input type='textarea' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
             <Button type='submit' onClick={this.handleSubmit}>
               {this.isLoading()}
