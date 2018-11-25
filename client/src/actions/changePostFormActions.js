@@ -8,6 +8,7 @@ import {
   CHANGE_POST_DATA,
   FORM_LOADING,
   MODAL_OPEN,
+  CLEAR_FORM,
 } from '../actions/types';
 import { getAllPosts } from './postActions';
 
@@ -61,6 +62,12 @@ export const changeDescription = (description) => {
   }
 };
 
+export const clearForm = () => {
+  return {
+    type: CLEAR_FORM,
+  }
+}
+
 export const submitPostForm = () => {
   return (dispatch, getState) => {
     const data = {
@@ -76,8 +83,8 @@ export const submitPostForm = () => {
       payload: true
     });
     const id = getState().postForm.id;
-    fetch(`/api/post/${id}`, {
-      method: "PUT",
+    fetch(`/api/post/${id ? id : ''}`, {
+      method: id ? "PUT" : "POST",
       mode: "cors", 
       "async": true,
       "crossDomain": true,
@@ -93,12 +100,13 @@ export const submitPostForm = () => {
     dispatch({
       type: FORM_LOADING,
       payload: false
-    })
+    });
     dispatch({
       type: MODAL_OPEN,
       payload: false
-    })
-    dispatch(getAllPosts())
+    });
+    dispatch(getAllPosts());
+    dispatch(clearForm());
   })
   }
 }
