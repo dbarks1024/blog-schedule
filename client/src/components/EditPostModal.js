@@ -54,11 +54,11 @@ class EditPostModal extends Component {
   }
 
   render() { 
-    const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.handleModalClose}>&times;</button>;
+    const closeBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.handleModalClose}>&times;</button>;
     return ( 
-      <Modal isOpen={this.props.modalOpen} external={externalCloseBtn}>
+      <Modal isOpen={this.props.modalOpen} external={closeBtn}>
         <ModalHeader>Test</ModalHeader>
-        {externalCloseBtn}
+        {closeBtn}
         <ModalBody>
           <Form>
             <FormGroup>
