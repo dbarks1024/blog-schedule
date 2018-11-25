@@ -5,7 +5,8 @@ import {
   CHANGE_STATUS,
   CHANGE_CATEGORY,
   CHANGE_DESCRIPTION,
-  CHANGE_DATE
+  CHANGE_DATE,
+  FORM_LOADING
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -16,6 +17,7 @@ const INITIAL_STATE = {
   category: '',
   description: '',
   id: '',
+  loading: false,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -60,6 +62,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         description: action.payload
+      }
+    case FORM_LOADING:
+      return {
+        ...state,
+        loading: true
       }
     default:
       return state

@@ -6,7 +6,11 @@ import {
   CHANGE_CATEGORY,
   CHANGE_DESCRIPTION,
   CHANGE_POST_DATA,
+  FORM_LOADING,
+  MODAL_OPEN,
 } from '../actions/types';
+import { getAllPosts } from './postActions';
+
 
 export const changePostFormData = (post) => {
   return {
@@ -67,7 +71,10 @@ export const submitPostForm = () => {
       "category": getState().postForm.category,
       "description": getState().postForm.description
     };
-    console.log(JSON.stringify(data))
+    dispatch({
+      type: FORM_LOADING,
+      payload: true
+    });
     const id = getState().postForm.id;
     fetch(`/api/post/${id}`, {
       method: "PUT",
@@ -78,9 +85,20 @@ export const submitPostForm = () => {
       credentials: "same-origin",
       headers: {
           "Content-Type": "application/json; charset=utf-8"
-      }, // manual, *follow, error
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
+      }, 
+      body: JSON.stringify(data), 
   })
   .then(response => console.log(response))
+  .then(() => {
+    dispatch({
+      type: FORM_LOADING,
+      payload: false
+    })
+    dispatch({
+      type: MODAL_OPEN,
+      payload: false
+    })
+    dispatch(getAllPosts())
+  })
   }
 }

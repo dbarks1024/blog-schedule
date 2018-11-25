@@ -43,6 +43,15 @@ class EditPostModal extends Component {
         break;
     }
   }
+
+  isLoading = () => {
+    if(this.props.loading) {
+      return 'spin';
+    }else {
+      return 'Submit';
+    }
+  }
+
   render() { 
     const externalCloseBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.handleModalClose}>&times;</button>;
     return ( 
@@ -74,7 +83,9 @@ class EditPostModal extends Component {
               <Label for='description'>Description</Label>
               <Input type='text' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
-            <Button type='submit' onClick={this.handleSubmit}>Submit</Button>
+            <Button type='submit' onClick={this.handleSubmit}>
+              {this.isLoading()}
+              </Button>
           </Form>
         </ModalBody>
       </Modal>
@@ -84,7 +95,7 @@ class EditPostModal extends Component {
 
 const mapStateToProps = (state) => {
   const { modalOpen } = state.postReducer
-  const { title, author, date, status, category, description } = state.postForm
+  const { title, author, date, status, category, description, loading } = state.postForm
   return {
     modalOpen,
     title,
@@ -92,7 +103,8 @@ const mapStateToProps = (state) => {
     date,
     status,
     category,
-    description
+    description,
+    loading
   }
 }
  
@@ -104,5 +116,5 @@ export default connect(mapStateToProps,
     changeCategory, 
     changeDescription, 
     changeDate,
-    submitPostForm
+    submitPostForm,
    })(EditPostModal);
