@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setModalOpen } from './actions/postActions';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavBar from './components/AppNavBar';
@@ -20,4 +19,4 @@ class App extends Component {
   }
 }
 
-export default connect(null, {setModalOpen})(App);
+export default connect(null, {})(App);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, ListGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
-import { getAllPosts } from '../actions/postActions';
+import { getAllPosts, setModalOpen } from '../actions/postActions';
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
 
@@ -31,4 +31,4 @@ const mapStateToProps = (state) =>{
   };
 }
  
-export default connect(mapStateToProps, { getAllPosts })(BlogList);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen })(BlogList);

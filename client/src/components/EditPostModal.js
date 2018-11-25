@@ -74,7 +74,13 @@ class EditPostModal extends Component {
             </FormGroup>
             <FormGroup>
               <Label for='status'>Status</Label>
-              <Input type='status' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}></Input>
+              <Input type='select' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}>
+                <option>Not Started</option>
+                <option>Drafting</option>
+                <option>Review</option>
+                <option>Ready</option>
+                <option>Posted</option>
+              </Input>
             </FormGroup>
             <FormGroup>
               <Label for='category'>Category</Label>
