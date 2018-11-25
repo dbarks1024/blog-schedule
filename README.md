@@ -1,15 +1,15 @@
 # blog-schedule
 App to schedule blog posts
 
-##Backend
+## Backend
 
-###GET /api/post
+### GET /api/post
 Gets all posts
 
-###GET /api/post/:id
+### GET /api/post/:id
 Gets specific post by id
 
-###Post /api/post
+### Post /api/post
 Creates new post
 Data needed:
 | Name | Required | Type |
@@ -21,7 +21,7 @@ Data needed:
 | status | r | String |
 | category |  | String |
 
-###PUT /api/post/:id
+### PUT /api/post/:id
 Updates Post
 Data needed:
 | Name | Required | Type |
