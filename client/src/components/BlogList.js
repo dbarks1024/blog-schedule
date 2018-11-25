@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup } from 'reactstrap';
+import { Container, ListGroup, Button } from 'reactstrap';
 import { connect } from 'react-redux';
 import { getAllPosts } from '../actions/postActions';
 import BlogListItem from './BlogListItem';
@@ -15,6 +15,7 @@ class BlogList extends Component {
   render() { 
     return (  
       <Container>
+        <Button className='mb-3' onClick={this.props.setModalOpen}>New Post</Button>
         <EditPostModal />
         <ListGroup>
           {this.props.posts.map((item, index) => <BlogListItem key={index} item={item}/>)}
