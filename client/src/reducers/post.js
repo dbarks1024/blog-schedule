@@ -1,9 +1,10 @@
-import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA } from '../actions/types';
+import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY } from '../actions/types';
 
 const INITIAL_STATE = {
   posts: [],
   modalOpen: false,
   changePostData: {},
+  sortBy: 'date-asc'
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -22,6 +23,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         changePostData: action.payload
+      }
+    case SORT_BY:
+      return {
+        ...state,
+        sortBy: action.payload 
       }
    default:
     return state

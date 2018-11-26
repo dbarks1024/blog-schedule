@@ -9,3 +9,4 @@ export const CHANGE_STATUS = 'change_status';
 export const CHANGE_POST_DATA = 'change_post_data';
 export const FORM_LOADING = 'post_loading';
 export const CLEAR_FORM = 'clear_form';
+export const SORT_BY = 'sort_by';
