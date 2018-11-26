@@ -61,7 +61,7 @@ class BlogList extends Component {
         </Form>
         <EditPostModal />
         <ListGroup>
-          {sortedList.map((item) => <BlogListItem key={item.id} item={item}/>)}
+          {sortedList.map((item) => <BlogListItem key={item._id} item={item}/>)}
         </ListGroup>
       </Container>
     );
