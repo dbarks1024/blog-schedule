@@ -85,7 +85,16 @@ class EditPostModal extends Component {
             </FormGroup>
             <FormGroup>
               <Label for='category'>Category</Label>
-              <Input type='text' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} ></Input>
+              <Input type='select' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} >
+                <option>Android</option>
+                <option>Back-End</option>
+                <option>Clients</option>
+                <option>Design</option>
+                <option>iOS</option>
+                <option>Front-End</option>
+                <option>Leadership</option>
+                <option>Mac</option>
+              </Input>
             </FormGroup>
             <FormGroup>
               <Label for='description'>Description</Label>
