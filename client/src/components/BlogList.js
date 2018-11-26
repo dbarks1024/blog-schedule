@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, ListGroup, Button, FormGroup, Input, Label } from 'reactstrap';
+import { Container, ListGroup, Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getAllPosts, setModalOpen, changeSortBy } from '../actions/postActions';
@@ -27,25 +27,23 @@ class BlogList extends Component {
         break;
       case 'date-asc':
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
-        console.log('asc');
         break;
       default:
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
         break;
     }
-    console.log('sort by' + this.props.sortBy)
-    console.log(sortedList);
-
     return (  
       <Container>
         <Button className='mb-3' onClick={this.props.setModalOpen}>New Post</Button>
-        <FormGroup>
-          <Label for='sort'>Sort By:</Label>
-          <Input type='select' id='sort' name='sort' equired onChange={this.handleSortChange} >
-            <option>date-desc</option>
-            <option >date-asc</option>
-          </Input>
-        </FormGroup>
+        <Form inline>
+          <FormGroup>
+            <Label for='sort'>Sort By:</Label>
+            <Input type='select' id='sort' name='sort' equired onChange={this.handleSortChange} >
+              <option>date-desc</option>
+              <option>date-asc</option>
+            </Input>
+          </FormGroup>
+        </Form>
         <EditPostModal />
         <ListGroup>
           {sortedList.map((item, index) => <BlogListItem key={index} item={item}/>)}
