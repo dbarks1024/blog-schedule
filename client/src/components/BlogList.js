@@ -27,6 +27,15 @@ class BlogList extends Component {
       case 'date-asc':
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
         break;
+      case 'category-desc':
+        sortedList = _.orderBy(this.props.posts, ['category'], ['desc'])
+        break;
+      case 'category-asc':
+        sortedList = _.orderBy(this.props.posts, ['category'], ['asc'])
+        break;
+      case 'status':
+        sortedList = _.orderBy(this.props.posts, ['status'], ['asc'])
+        break;
       default:
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
         break;
@@ -40,6 +49,9 @@ class BlogList extends Component {
             <Input type='select' id='sort' name='sort' equired onChange={this.handleSortChange} >
               <option>date-asc</option>
               <option>date-desc</option>
+              <option>category-asc</option>
+              <option>category-desc</option>
+              <option>status</option>
             </Input>
           </FormGroup>
         </Form>
