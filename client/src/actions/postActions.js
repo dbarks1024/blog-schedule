@@ -1,4 +1,4 @@
-import { ALL_POSTS, MODAL_OPEN } from './types';
+import { ALL_POSTS, MODAL_OPEN, SORT_BY } from './types';
 import moment from 'moment';
 
 export const getAllPosts = () => {
@@ -26,4 +26,11 @@ export const setModalOpen = (bool) => {
     type: MODAL_OPEN,
     payload: bool
   }
+}
+
+export const changeSortBy = (type) => {
+  return {
+    type: SORT_BY,
+    payload: type
+  } 
 }
