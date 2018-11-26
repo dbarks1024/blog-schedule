@@ -16,7 +16,6 @@ class BlogList extends Component {
   handleSortChange = (event) => {
     const value = event.target.value;
     this.props.changeSortBy(value);
-    this.forceUpdate()
   }
 
   render() { 
@@ -35,12 +34,12 @@ class BlogList extends Component {
     return (  
       <Container>
         <Button className='mb-3' onClick={this.props.setModalOpen}>New Post</Button>
-        <Form inline>
+        <Form inline className='float-right'>
           <FormGroup>
             <Label for='sort'>Sort By:</Label>
             <Input type='select' id='sort' name='sort' equired onChange={this.handleSortChange} >
-              <option>date-desc</option>
               <option>date-asc</option>
+              <option>date-desc</option>
             </Input>
           </FormGroup>
         </Form>
