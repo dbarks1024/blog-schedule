@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import { ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
 import { changePostFormData } from '../actions/changePostFormActions';
 import 'uiw-iconfont/fonts/w-icon.css'; 
-import "./BlogListItem.css";
+import './BlogListItem.css';
 
 class BlogListItem extends Component {
   listItemColor(status) {
     switch (status) {
-      case 'Not Started':
-        return 'danger';
-      case 'Drafting':
-      case 'Review':
-        return 'warning';
-      case 'Ready': 
-        return 'success';
-      case 'Posted':
-        return 'info';
-      default: 
-        return '';
+    case 'Not Started':
+      return 'danger';
+    case 'Drafting':
+    case 'Review':
+      return 'warning';
+    case 'Ready': 
+      return 'success';
+    case 'Posted':
+      return 'info';
+    default: 
+      return '';
     }
   }
 
@@ -28,17 +29,17 @@ class BlogListItem extends Component {
     const { item } = this.props;
     return (
       <ListGroupItem 
-      color={this.listItemColor(item.status)} 
-      className='align-items-start flex-column'
+        color={this.listItemColor(item.status)} 
+        className='align-items-start flex-column'
       >
         <div className='float-left'>
           <i 
-          className='w-icon-edit mt-auto mr-2'
-          onClick={() => {
-            this.props.setModalOpen(true);
-            this.props.changePostFormData(item);
+            className='w-icon-edit mt-auto mr-2'
+            onClick={() => {
+              this.props.setModalOpen(true);
+              this.props.changePostFormData(item);
             }
-          } 
+            } 
           ></i>
         </div>
         <div className='d-inline-block w-95'>
@@ -54,10 +55,16 @@ class BlogListItem extends Component {
             <ListGroupItemText>{item.description}</ListGroupItemText>
             <p className='mb-0'>{item.status}</p>
           </div>
-         </div>
+        </div>
       </ListGroupItem>
     );
   }
 }
- 
+
+BlogListItem.propTypes = {
+  item: PropTypes.object,
+  setModalOpen: PropTypes.func,
+  changePostFormData: PropTypes.func,
+};
+
 export default connect(null, { setModalOpen, changePostFormData })(BlogListItem);

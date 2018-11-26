@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label, ListGroup } from 'reactstrap';
@@ -8,7 +9,6 @@ import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
 
 class BlogList extends Component {
-  state = { blogs: [] }
   
   componentDidMount() {
     this.props.getAllPosts();
@@ -22,26 +22,26 @@ class BlogList extends Component {
   render() { 
     let sortedList = [];
     switch (this.props.sortBy) {
-      case DATE_DESC:
-        sortedList = _.orderBy(this.props.posts, ['date'], ['desc'] )
-        break;
-      case DATE_ASC:
-        sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
-        break;
-      case CATEGORY_DESC:
-        sortedList = _.orderBy(this.props.posts, ['category'], ['desc'])
-        break;
-      case CATEGORY_ASC:
-        sortedList = _.orderBy(this.props.posts, ['category'], ['asc'])
-        console.log(sortedList);
-        break;
-      case STATUS:
-        sortedList = _.orderBy(this.props.posts, ['status'], ['asc'])
-        break;
-      default:
-        sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
-        console.log('default sort');
-        break;
+    case DATE_DESC:
+      sortedList = _.orderBy(this.props.posts, ['date'], ['desc'] );
+      break;
+    case DATE_ASC:
+      sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] );
+      break;
+    case CATEGORY_DESC:
+      sortedList = _.orderBy(this.props.posts, ['category'], ['desc']);
+      break;
+    case CATEGORY_ASC:
+      sortedList = _.orderBy(this.props.posts, ['category'], ['asc']);
+      console.log(sortedList);
+      break;
+    case STATUS:
+      sortedList = _.orderBy(this.props.posts, ['status'], ['asc']);
+      break;
+    default:
+      sortedList = _.orderBy(this.props.posts, ['date'], ['asc']);
+      console.log('default sort');
+      break;
     }
     return (  
       <Container>
@@ -67,12 +67,20 @@ class BlogList extends Component {
   }
 }
 
+BlogList.propTypes = {
+  setModalOpen: PropTypes.func,
+  getAllPosts: PropTypes.func,
+  changeSortBy : PropTypes.func,
+  posts: PropTypes.array,
+  sortBy: PropTypes.string,
+};
+
 const mapStateToProps = (state) =>{
   const { sortBy, posts } = state.postReducer;
   return {
     posts: posts,
     sortBy: sortBy,
   };
-}
+};
  
 export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy })(BlogList);
