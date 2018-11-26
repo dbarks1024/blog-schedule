@@ -5,6 +5,7 @@ import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './cons
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label, ListGroup } from 'reactstrap';
 import { changeSortBy, getAllPosts, setModalOpen } from '../actions/postActions';
+import { clearForm } from '../actions/changePostFormActions';
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
 
@@ -17,6 +18,11 @@ class BlogList extends Component {
   handleSortChange = (event) => {
     const value = event.target.value;
     this.props.changeSortBy(value);
+  }
+
+  handleNewPost = () => {
+    this.props.setModalOpen(true);
+    this.props.clearForm();
   }
 
   render() { 
@@ -45,7 +51,7 @@ class BlogList extends Component {
     }
     return (  
       <Container>
-        <Button className='mb-3' onClick={this.props.setModalOpen}>New Post</Button>
+        <Button className='mb-3' onClick={this.handleNewPost}>New Post</Button>
         <Form inline className='float-right'>
           <FormGroup>
             <Label for='sort'>Sort By:</Label>
@@ -73,6 +79,7 @@ BlogList.propTypes = {
   changeSortBy : PropTypes.func,
   posts: PropTypes.array,
   sortBy: PropTypes.string,
+  clearForm: PropTypes.func,
 };
 
 const mapStateToProps = (state) =>{
@@ -83,4 +90,4 @@ const mapStateToProps = (state) =>{
   };
 };
  
-export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy })(BlogList);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm })(BlogList);

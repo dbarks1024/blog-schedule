@@ -111,3 +111,31 @@ export const submitPostForm = () => {
       });
   };
 };
+
+export const deletePost = () => {
+  return (dispatch, getState) => {
+    dispatch(formLoading(true));
+    const id = getState().postForm.id;
+    fetch(`/api/post/${id ? id : ''}`, {
+      method: 'DELETE',
+      mode: 'cors', 
+      'async': true,
+      'crossDomain': true,
+      cache: 'no-cache', 
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }, 
+    })
+      .then(response => console.log(response))
+      .then(() => {
+        dispatch(formLoading(false));
+        dispatch({
+          type: MODAL_OPEN,
+          payload: false
+        });
+        dispatch(getAllPosts());
+        dispatch(clearForm());
+      });
+  };
+};

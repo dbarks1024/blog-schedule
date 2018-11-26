@@ -3,19 +3,26 @@ import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
-import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm } from '../actions/changePostFormActions';
+import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost, clearForm } from '../actions/changePostFormActions';
 import LoadingSpinner from './spinner/LoadingSpinner';
 
 class EditPostModal extends Component {
 
   handleModalClose = () => {
     this.props.setModalOpen(!this.props.modalOpen);
+    this.props.clearForm();
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
     this.props.submitPostForm();
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.deletePost();
   }
 
   handleInputChange = (event) => {
@@ -51,6 +58,12 @@ class EditPostModal extends Component {
       return <LoadingSpinner />;
     }else {
       return 'Submit';
+    }
+  }
+
+  renderDelete = () => {
+    if(this.props.id) {
+      return <Button className='warning' type='submit' onClick={this.handleDelete}>Delete</Button>;
     }
   }
 
@@ -104,6 +117,7 @@ class EditPostModal extends Component {
             <Button type='submit' onClick={this.handleSubmit}>
               {this.isLoading()}
             </Button>
+            {this.renderDelete()}
           </Form>
         </ModalBody>
       </Modal>
@@ -119,6 +133,7 @@ EditPostModal.propTypes = {
   status: PropTypes.string,
   category: PropTypes.string,
   description: PropTypes.string,
+  id: PropTypes.string,
   loading: PropTypes.bool,
   setModalOpen: PropTypes.func,
   changeTitle: PropTypes.func,
@@ -128,11 +143,13 @@ EditPostModal.propTypes = {
   changeDescription: PropTypes.func,
   changeDate: PropTypes.func,
   submitPostForm: PropTypes.func,
+  deletePost: PropTypes.func,
+  clearForm: PropTypes.func,
 };
 
 const mapStateToProps = (state) => {
   const { modalOpen } = state.postReducer;
-  const { title, author, date, status, category, description, loading } = state.postForm;
+  const { title, author, date, status, category, description, id, loading } = state.postForm;
   return {
     modalOpen,
     title,
@@ -141,6 +158,7 @@ const mapStateToProps = (state) => {
     status,
     category,
     description,
+    id,
     loading
   };
 };
@@ -154,4 +172,6 @@ export default connect(mapStateToProps,
     changeDescription, 
     changeDate,
     submitPostForm,
+    deletePost,
+    clearForm,
   })(EditPostModal);
