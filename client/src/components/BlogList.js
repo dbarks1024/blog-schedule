@@ -7,7 +7,6 @@ import { changeSortBy, getAllPosts, setModalOpen } from '../actions/postActions'
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
 
-
 class BlogList extends Component {
   state = { blogs: [] }
   
