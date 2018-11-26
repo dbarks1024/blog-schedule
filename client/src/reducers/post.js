@@ -1,10 +1,11 @@
 import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY } from '../actions/types';
+import { DATE_ASC } from '../components/consts';
 
 const INITIAL_STATE = {
   posts: [],
   modalOpen: false,
   changePostData: {},
-  sortBy: 'date-asc'
+  sortBy: DATE_ASC
 }
 
 export default (state = INITIAL_STATE, action) => {

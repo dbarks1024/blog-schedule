@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import { Container, ListGroup, Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { connect } from 'react-redux';
 import _ from 'lodash';
-import { getAllPosts, setModalOpen, changeSortBy } from '../actions/postActions';
+import React, { Component } from 'react';
+import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
+import { connect } from 'react-redux';
+import { Button, Container, Form, FormGroup, Input, Label, ListGroup } from 'reactstrap';
+import { changeSortBy, getAllPosts, setModalOpen } from '../actions/postActions';
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
+
 
 class BlogList extends Component {
   state = { blogs: [] }
@@ -21,23 +23,25 @@ class BlogList extends Component {
   render() { 
     let sortedList = [];
     switch (this.props.sortBy) {
-      case 'date-desc':
+      case DATE_DESC:
         sortedList = _.orderBy(this.props.posts, ['date'], ['desc'] )
         break;
-      case 'date-asc':
+      case DATE_ASC:
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
         break;
-      case 'category-desc':
+      case CATEGORY_DESC:
         sortedList = _.orderBy(this.props.posts, ['category'], ['desc'])
         break;
-      case 'category-asc':
+      case CATEGORY_ASC:
         sortedList = _.orderBy(this.props.posts, ['category'], ['asc'])
+        console.log(sortedList);
         break;
-      case 'status':
+      case STATUS:
         sortedList = _.orderBy(this.props.posts, ['status'], ['asc'])
         break;
       default:
         sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] )
+        console.log('default sort');
         break;
     }
     return (  
@@ -46,12 +50,12 @@ class BlogList extends Component {
         <Form inline className='float-right'>
           <FormGroup>
             <Label for='sort'>Sort By:</Label>
-            <Input type='select' id='sort' name='sort' equired onChange={this.handleSortChange} >
-              <option>date-asc</option>
-              <option>date-desc</option>
-              <option>category-asc</option>
-              <option>category-desc</option>
-              <option>status</option>
+            <Input type='select' id='sort' name='sort' required onChange={this.handleSortChange} >
+              <option value={DATE_ASC}>Date Asc.</option>
+              <option value={DATE_DESC}>Date Desc.</option>
+              <option value={CATEGORY_ASC}>Category Asc.</option>
+              <option value={CATEGORY_DESC}>Category Desc.</option>
+              <option value={STATUS}>Staus</option>
             </Input>
           </FormGroup>
         </Form>
