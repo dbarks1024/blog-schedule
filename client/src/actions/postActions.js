@@ -36,7 +36,7 @@ export const changeSortBy = (type) => {
 };
 
 export const getDateRange = () => {
-  const currentTuesday =  moment().day('wednsday').format('YYYY/MM/DD');
+  const currentTuesday =  moment().day('tuesday');
   const weeksAfter = 12;
   const weeksBefore = 5;
   const firstTuesday = (moment(currentTuesday).subtract(weeksBefore, 'week') );
@@ -45,7 +45,7 @@ export const getDateRange = () => {
   let datesArray = [];
 
   for (let i = 0; i < totalWeeks + 1 ; i++) {
-    datesArray.push(moment(firstTuesday).add(i, 'week').format('YYYY/MM/DD'));
+    datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYY'));
   }
   return {
     type: DATE_RANGE,
