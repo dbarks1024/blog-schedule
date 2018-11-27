@@ -90,6 +90,7 @@ class EditPostModal extends Component {
             <FormGroup>
               <Label for='status'>Status</Label>
               <Input type='select' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}>
+                <option disabled selected value=''> -- select an option -- </option>
                 <option>Not Started</option>
                 <option>Drafting</option>
                 <option>Review</option>
@@ -100,6 +101,7 @@ class EditPostModal extends Component {
             <FormGroup>
               <Label for='category'>Category</Label>
               <Input type='select' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} >
+                <option disabled selected value=''> -- select an option -- </option>
                 <option>Android</option>
                 <option>Back-End</option>
                 <option>Clients</option>
