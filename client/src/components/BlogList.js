@@ -29,9 +29,11 @@ class BlogList extends Component {
   }
 
   filterBlogListItem(sortedList, date) {
+    console.log(date);
+    const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
     const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
     return _.filter(sortedList, (item) => (
-      moment(item.date,).isBetween(date, endDate)
+      moment(item.date,).isBetween(firstDate, endDate)
     ))
       .map((item) => <BlogListItem key={item._id} item={item}/>);
   }
