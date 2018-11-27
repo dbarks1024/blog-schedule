@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
 import { connect } from 'react-redux';
@@ -26,6 +27,26 @@ class BlogList extends Component {
     this.props.setModalOpen(true);
     this.props.clearForm();
   }
+
+  filterBlogListItem(sortedList, date) {
+    const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
+    return _.filter(sortedList, (item) => (
+      moment(item.date,).isBetween(date, endDate)
+    ))
+      .map((item) => <BlogListItem key={item._id} item={item}/>);
+  }
+
+  renderListItems = (sortedList) => {
+    if(this.props.sortBy === DATE_ASC){
+      return this.props.dateRange.map((date) => (
+        <ListSectionItem name={date} key={date}>
+          {this.filterBlogListItem(sortedList, date)}
+        </ListSectionItem>
+      )
+      );
+    } 
+    return sortedList.map((item) => <BlogListItem key={item._id} item={item}/>);
+  };
 
   render() { 
     let sortedList = [];
@@ -68,8 +89,7 @@ class BlogList extends Component {
         </Form>
         <EditPostModal />
         <ListGroup>
-          {this.props.dateRange.map((date) => <ListSectionItem name={date} key={date} />)}
-          {sortedList.map((item) => <BlogListItem key={item._id} item={item}/>)}
+          {this.renderListItems(sortedList)}
         </ListGroup>
       </Container>
     );

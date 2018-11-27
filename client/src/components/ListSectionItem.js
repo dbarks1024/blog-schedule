@@ -4,14 +4,18 @@ import PropTypes from 'prop-types';
 
 class ListSectionItem extends Component {
   render() { 
-    return (  
-      <ListGroupItem>{this.props.name}</ListGroupItem>
+    return ( 
+      <React.Fragment>
+        <ListGroupItem>{this.props.name}</ListGroupItem>
+        {this.props.children}
+      </React.Fragment>
     );
   }
 }
 
 ListSectionItem.propTypes = {
   name: PropTypes.string,
+  children: PropTypes.array
 };
  
 export default ListSectionItem;

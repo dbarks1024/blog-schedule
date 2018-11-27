@@ -45,7 +45,7 @@ export const getDateRange = () => {
   let datesArray = [];
 
   for (let i = 0; i < totalWeeks + 1 ; i++) {
-    datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYY'));
+    datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYYY'));
   }
   return {
     type: DATE_RANGE,
