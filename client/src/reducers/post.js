@@ -1,11 +1,12 @@
-import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY } from '../actions/types';
+import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY, DATE_RANGE } from '../actions/types';
 import { DATE_ASC } from '../components/consts';
 
 const INITIAL_STATE = {
   posts: [],
   modalOpen: false,
   changePostData: {},
-  sortBy: DATE_ASC
+  sortBy: DATE_ASC,
+  dateRange: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -29,6 +30,11 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       sortBy: action.payload 
+    };
+  case DATE_RANGE:
+    return {
+      ...state,
+      dateRange: action.payload
     };
   default:
     return state;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label, ListGroup } from 'reactstrap';
-import { changeSortBy, getAllPosts, setModalOpen } from '../actions/postActions';
+import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../actions/postActions';
 import { clearForm } from '../actions/changePostFormActions';
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
@@ -13,6 +13,7 @@ class BlogList extends Component {
   
   componentDidMount() {
     this.props.getAllPosts();
+    this.props.getDateRange();
   }
 
   handleSortChange = (event) => {
@@ -80,6 +81,7 @@ BlogList.propTypes = {
   posts: PropTypes.array,
   sortBy: PropTypes.string,
   clearForm: PropTypes.func,
+  getDateRange: PropTypes.func
 };
 
 const mapStateToProps = (state) =>{
@@ -90,4 +92,4 @@ const mapStateToProps = (state) =>{
   };
 };
  
-export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm })(BlogList);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange })(BlogList);

@@ -1,4 +1,4 @@
-import { ALL_POSTS, MODAL_OPEN, SORT_BY } from './types';
+import { ALL_POSTS, MODAL_OPEN, SORT_BY, DATE_RANGE } from './types';
 import moment from 'moment';
 
 export const getAllPosts = () => {
@@ -33,4 +33,22 @@ export const changeSortBy = (type) => {
     type: SORT_BY,
     payload: type
   }; 
+};
+
+export const getDateRange = () => {
+  const currentTuesday =  moment().day('wednsday').format('YYYY/MM/DD');
+  const weeksAfter = 12;
+  const weeksBefore = 5;
+  const firstTuesday = (moment(currentTuesday).subtract(weeksBefore, 'week') );
+  const totalWeeks = weeksAfter + weeksBefore;
+
+  let datesArray = [firstTuesday];
+
+  for (let i = 0; i < totalWeeks + 1 ; i++) {
+    datesArray.push(moment(firstTuesday).add(i, 'week').format('YYYY/MM/DD'));
+  }
+  return {
+    type: DATE_RANGE,
+    payload: datesArray
+  };
 };
