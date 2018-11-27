@@ -42,7 +42,7 @@ export const getDateRange = () => {
   const firstTuesday = (moment(currentTuesday).subtract(weeksBefore, 'week') );
   const totalWeeks = weeksAfter + weeksBefore;
 
-  let datesArray = [firstTuesday];
+  let datesArray = [];
 
   for (let i = 0; i < totalWeeks + 1 ; i++) {
     datesArray.push(moment(firstTuesday).add(i, 'week').format('YYYY/MM/DD'));

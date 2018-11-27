@@ -8,6 +8,7 @@ import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../action
 import { clearForm } from '../actions/changePostFormActions';
 import BlogListItem from './BlogListItem';
 import EditPostModal from './EditPostModal';
+import ListSectionItem from './ListSectionItem';
 
 class BlogList extends Component {
   
@@ -67,6 +68,7 @@ class BlogList extends Component {
         </Form>
         <EditPostModal />
         <ListGroup>
+          {this.props.dateRange.map((date) => <ListSectionItem name={date} key={date} />)}
           {sortedList.map((item) => <BlogListItem key={item._id} item={item}/>)}
         </ListGroup>
       </Container>
@@ -79,16 +81,18 @@ BlogList.propTypes = {
   getAllPosts: PropTypes.func,
   changeSortBy : PropTypes.func,
   posts: PropTypes.array,
+  dateRange: PropTypes.array,
   sortBy: PropTypes.string,
   clearForm: PropTypes.func,
   getDateRange: PropTypes.func
 };
 
 const mapStateToProps = (state) =>{
-  const { sortBy, posts } = state.postReducer;
+  const { sortBy, posts, dateRange } = state.postReducer;
   return {
-    posts: posts,
-    sortBy: sortBy,
+    posts,
+    sortBy,
+    dateRange,
   };
 };
  
