@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
-import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm } from '../actions/changePostFormActions';
+import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost, clearForm } from '../actions/changePostFormActions';
 import LoadingSpinner from './spinner/LoadingSpinner';
 
 class EditPostModal extends Component {
 
   handleModalClose = () => {
-    this.props.setModalOpen(!this.props.modalOpen)
+    this.props.setModalOpen(!this.props.modalOpen);
+    this.props.clearForm();
   }
 
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     e.stopPropagation();
-    this.props.submitPostForm()
+    this.props.submitPostForm();
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.props.deletePost();
   }
 
   handleInputChange = (event) => {
@@ -22,26 +30,26 @@ class EditPostModal extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
     switch (name) {
-      case 'title':
-        this.props.changeTitle(value);
-        break;
-      case 'author':
-        this.props.changeAuthor(value);
-        break;
-      case 'date':
-        this.props.changeDate(value);
-        break;
-      case 'status':
-        this.props.changeStatus(value);
-        break;
-      case 'category':
-        this.props.changeCategory(value);
-        break;
-      case 'description':
-        this.props.changeDescription(value);
-        break;
-      default:
-        break;
+    case 'title':
+      this.props.changeTitle(value);
+      break;
+    case 'author':
+      this.props.changeAuthor(value);
+      break;
+    case 'date':
+      this.props.changeDate(value);
+      break;
+    case 'status':
+      this.props.changeStatus(value);
+      break;
+    case 'category':
+      this.props.changeCategory(value);
+      break;
+    case 'description':
+      this.props.changeDescription(value);
+      break;
+    default:
+      break;
     }
   }
 
@@ -50,6 +58,12 @@ class EditPostModal extends Component {
       return <LoadingSpinner />;
     }else {
       return 'Submit';
+    }
+  }
+
+  renderDelete = () => {
+    if(this.props.id) {
+      return <Button className='warning' type='submit' onClick={this.handleDelete}>Delete</Button>;
     }
   }
 
@@ -76,6 +90,7 @@ class EditPostModal extends Component {
             <FormGroup>
               <Label for='status'>Status</Label>
               <Input type='select' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}>
+                <option disabled selected value=''> -- select an option -- </option>
                 <option>Not Started</option>
                 <option>Drafting</option>
                 <option>Review</option>
@@ -86,6 +101,7 @@ class EditPostModal extends Component {
             <FormGroup>
               <Label for='category'>Category</Label>
               <Input type='select' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} >
+                <option disabled selected value=''> -- select an option -- </option>
                 <option>Android</option>
                 <option>Back-End</option>
                 <option>Clients</option>
@@ -102,7 +118,8 @@ class EditPostModal extends Component {
             </FormGroup>
             <Button type='submit' onClick={this.handleSubmit}>
               {this.isLoading()}
-              </Button>
+            </Button>
+            {this.renderDelete()}
           </Form>
         </ModalBody>
       </Modal>
@@ -110,9 +127,31 @@ class EditPostModal extends Component {
   }
 }
 
+EditPostModal.propTypes = {
+  modalOpen: PropTypes.bool,
+  title: PropTypes.string,
+  author: PropTypes.string,
+  date: PropTypes.string,
+  status: PropTypes.string,
+  category: PropTypes.string,
+  description: PropTypes.string,
+  id: PropTypes.string,
+  loading: PropTypes.bool,
+  setModalOpen: PropTypes.func,
+  changeTitle: PropTypes.func,
+  changeAuthor: PropTypes.func,
+  changeStatus: PropTypes.func,
+  changeCategory: PropTypes.func,
+  changeDescription: PropTypes.func,
+  changeDate: PropTypes.func,
+  submitPostForm: PropTypes.func,
+  deletePost: PropTypes.func,
+  clearForm: PropTypes.func,
+};
+
 const mapStateToProps = (state) => {
-  const { modalOpen } = state.postReducer
-  const { title, author, date, status, category, description, loading } = state.postForm
+  const { modalOpen } = state.postReducer;
+  const { title, author, date, status, category, description, id, loading } = state.postForm;
   return {
     modalOpen,
     title,
@@ -121,9 +160,10 @@ const mapStateToProps = (state) => {
     status,
     category,
     description,
+    id,
     loading
-  }
-}
+  };
+};
  
 export default connect(mapStateToProps, 
   { setModalOpen, 
@@ -134,4 +174,6 @@ export default connect(mapStateToProps,
     changeDescription, 
     changeDate,
     submitPostForm,
-   })(EditPostModal);
+    deletePost,
+    clearForm,
+  })(EditPostModal);

@@ -14,10 +14,13 @@ import {
 
 
 class AppNavBar extends Component {
-  state = {
-    isOpen: false
-  }
-
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false
+    };
+  } 
+  
   toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
