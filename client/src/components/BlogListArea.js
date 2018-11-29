@@ -1,17 +1,16 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
 import { connect } from 'react-redux';
-import { Button, Container, Form, FormGroup, Input, Label, ListGroup } from 'reactstrap';
+import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../actions/postActions';
 import { clearForm } from '../actions/changePostFormActions';
-import BlogListItem from './BlogListItem';
+import BlogLists from './BlogLists';
 import EditPostModal from './EditPostModal';
-import ListSectionItem from './ListSectionItem';
 
-class BlogList extends Component {
+class BlogListArea extends Component {
   
   componentDidMount() {
     this.props.getAllPosts();
@@ -27,34 +26,11 @@ class BlogList extends Component {
     this.props.setModalOpen(true);
     this.props.clearForm();
   }
-
-  renderLists = (listData, sortedList) => {
-    if(this.props.sortBy === DATE_ASC){
-      return listData.map((list) => {
-        const date = Object.keys(list)[0];
-        return(
-          <ul
-            key={date}
-          >
-            <ListSectionItem
-              name={date}
-            />
-            {list[date].map((listItem) => (
-              <div
-                key={listItem._id}
-              >
-                <BlogListItem 
-                  item={listItem}
-                />
-              </div>
-            ))}
-          </ul>
-        );
-      }
-      );
-    } 
-    return sortedList.map((item) => <BlogListItem key={item._id} item={item}/>);
+  onDragEnd = result => {
+    console.log(result);
   };
+
+
 
   render() { 
     let sortedList = [];
@@ -81,17 +57,7 @@ class BlogList extends Component {
       break;
     }
 
-    const listData = this.props.dateRange.map((date) =>{
-      const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
-      const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
-      const data = _.filter(sortedList, (item) => (
-        moment(item.date,).isBetween(firstDate, endDate)
-      ))
-        .map((item) => {
-          return item;
-        });   
-      return {[date]: data};
-    });
+    
 
     return (  
       <Container>
@@ -109,15 +75,15 @@ class BlogList extends Component {
           </FormGroup>
         </Form>
         <EditPostModal />
-        <ListGroup>
-          {this.renderLists(listData, sortedList)}
-        </ListGroup>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <BlogLists sortedList={sortedList}/>
+        </DragDropContext>
       </Container>
     );
   }
 }
 
-BlogList.propTypes = {
+BlogListArea.propTypes = {
   setModalOpen: PropTypes.func,
   getAllPosts: PropTypes.func,
   changeSortBy : PropTypes.func,
@@ -137,4 +103,4 @@ const mapStateToProps = (state) =>{
   };
 };
  
-export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange })(BlogList);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange })(BlogListArea);
