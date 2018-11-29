@@ -12,4 +12,4 @@ export const CLEAR_FORM = 'clear_form';
 export const SORT_BY = 'sort_by';
 export const DATE_RANGE = 'date_range';
 export const BLOG_LIST_DATA = 'blog_list_data';
-export const SORTED_POSTS_LIST = 'soted_posts_list';
+export const SORTED_POSTS_LIST = 'sorted_posts_list';

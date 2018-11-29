@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
-import { createBlogListData } from '../actions/blogListActions';
+import { createBlogListData, moveBlogListData } from '../actions/blogListActions';
 import BlogListItem from './BlogListItem';
 import { DATE_ASC } from './consts';
 import ListSectionItem from './ListSectionItem';
 
 
 class BlogLists extends Component {
+  onDragEnd = result => {
+    console.log(result);
+    const {destination, source} = result;
+    if (!destination) {
+      return;
+    }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    this.props.moveBlogListData(destination, source);
+    this.forceUpdate();
+  };
+
   renderLists = ( ) => {
     const listData = this.props.blogListData;
     const sortedList = this.props.sortedPostsList;
@@ -63,9 +79,11 @@ class BlogLists extends Component {
 
   render() { 
     return ( 
-      <ListGroup>
-        {this.renderLists()}
-      </ListGroup>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <ListGroup>
+          {this.renderLists()}
+        </ListGroup>
+      </DragDropContext>
     );
   }
 }
@@ -80,4 +98,4 @@ const mapStateToProps = (state) =>{
   };
 };
 
-export default connect(mapStateToProps, { createBlogListData })(BlogLists);
+export default connect(mapStateToProps, { createBlogListData, moveBlogListData })(BlogLists);

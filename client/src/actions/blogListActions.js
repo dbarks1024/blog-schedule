@@ -61,6 +61,28 @@ export const createBlogListData = () => {
       payload: listData
     });
   };
-  
-  
+};
+
+export const moveBlogListData = (destination, source, ) => {
+  return (dispatch, getState) => {
+    let blogListData = getState().blogListReducer.blogListData;
+    const sourceSectionIndex = _.findIndex(blogListData, (post) => {return Object.keys(post)[0] === source.droppableId; });
+    const sourceSection = blogListData[sourceSectionIndex][source.droppableId];
+    const blogToMove = _.pullAt(sourceSection, source.index)[0];
+    const destinationSectionIndex = _.findIndex(blogListData, (post) => {return Object.keys(post)[0] === destination.droppableId; });
+    console.log(blogToMove);
+
+    //remove from source
+    blogListData[sourceSectionIndex][source.droppableId].splice(source.index, 1);
+    console.log(blogListData[sourceSectionIndex][source.droppableId]);
+
+    //add to destination
+    blogListData[destinationSectionIndex][destination.droppableId].splice(destination.index, 0, blogToMove);
+
+    dispatch({
+      type: BLOG_LIST_DATA,
+      payload: blogListData
+    });
+    console.log(blogListData);
+  };
 };

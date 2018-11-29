@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
@@ -27,12 +26,8 @@ class BlogListArea extends Component {
     this.props.setModalOpen(true);
     this.props.clearForm();
   }
-  onDragEnd = result => {
-    console.log(result);
-  };
 
   render() { 
-
     return (  
       <Container>
         <Button className='mb-3' onClick={this.handleNewPost}>New Post</Button>
@@ -49,9 +44,7 @@ class BlogListArea extends Component {
           </FormGroup>
         </Form>
         <EditPostModal />
-        <DragDropContext onDragEnd={this.onDragEnd}>
-          <BlogLists/>
-        </DragDropContext>
+        <BlogLists/>
       </Container>
     );
   }
