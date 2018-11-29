@@ -72,10 +72,11 @@ class BlogLists extends Component {
  
 const mapStateToProps = (state) =>{
   const { blogListData, sortedPostsList } = state.blogListReducer;
-
+  const { sortBy } = state.postReducer;
   return {
     blogListData,
     sortedPostsList,
+    sortBy,
   };
 };
 
