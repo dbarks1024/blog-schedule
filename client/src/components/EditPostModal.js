@@ -63,7 +63,7 @@ class EditPostModal extends Component {
 
   renderDelete = () => {
     if(this.props.id) {
-      return <Button className='warning' type='submit' onClick={this.handleDelete}>Delete</Button>;
+      return <Button className='btn-danger ml-3' onClick={this.handleDelete}>Delete</Button>;
     }
   }
 
@@ -116,7 +116,7 @@ class EditPostModal extends Component {
               <Label for='description'>Description</Label>
               <Input type='textarea' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
-            <Button type='submit' onClick={this.handleSubmit}>
+            <Button onClick={this.handleSubmit}>
               {this.isLoading()}
             </Button>
             {this.renderDelete()}
