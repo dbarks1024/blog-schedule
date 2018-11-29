@@ -28,23 +28,29 @@ class BlogList extends Component {
     this.props.clearForm();
   }
 
-  filterBlogListItem(sortedList, date) {
-    console.log(date);
-    const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
-    const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
-    return _.filter(sortedList, (item) => (
-      moment(item.date,).isBetween(firstDate, endDate)
-    ))
-      .map((item) => <BlogListItem key={item._id} item={item}/>);
-  }
-
-  renderListItems = (sortedList) => {
+  renderLists = (listData, sortedList) => {
     if(this.props.sortBy === DATE_ASC){
-      return this.props.dateRange.map((date) => (
-        <ListSectionItem name={date} key={date}>
-          {this.filterBlogListItem(sortedList, date)}
-        </ListSectionItem>
-      )
+      return listData.map((list) => {
+        const date = Object.keys(list)[0];
+        return(
+          <ul
+            key={date}
+          >
+            <ListSectionItem
+              name={date}
+            />
+            {list[date].map((listItem) => (
+              <div
+                key={listItem._id}
+              >
+                <BlogListItem 
+                  item={listItem}
+                />
+              </div>
+            ))}
+          </ul>
+        );
+      }
       );
     } 
     return sortedList.map((item) => <BlogListItem key={item._id} item={item}/>);
@@ -74,6 +80,19 @@ class BlogList extends Component {
       console.log('default sort');
       break;
     }
+
+    const listData = this.props.dateRange.map((date) =>{
+      const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
+      const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
+      const data = _.filter(sortedList, (item) => (
+        moment(item.date,).isBetween(firstDate, endDate)
+      ))
+        .map((item) => {
+          return item;
+        });   
+      return {[date]: data};
+    });
+
     return (  
       <Container>
         <Button className='mb-3' onClick={this.handleNewPost}>New Post</Button>
@@ -91,7 +110,7 @@ class BlogList extends Component {
         </Form>
         <EditPostModal />
         <ListGroup>
-          {this.renderListItems(sortedList)}
+          {this.renderLists(listData, sortedList)}
         </ListGroup>
       </Container>
     );
