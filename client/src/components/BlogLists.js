@@ -45,6 +45,7 @@ class BlogLists extends Component {
                 <ul
                   ref={provided.innerRef}
                   key={date}
+                  style={{minHeight: 3}}
                 >
                   {list[date].map((listItem, index) => (
                     <Draggable
