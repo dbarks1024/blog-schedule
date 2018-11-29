@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-beautiful-dnd';
@@ -6,6 +5,7 @@ import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './cons
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../actions/postActions';
+import { sortPostsList } from '../actions/blogListActions';
 import { clearForm } from '../actions/changePostFormActions';
 import BlogLists from './BlogLists';
 import EditPostModal from './EditPostModal';
@@ -20,6 +20,7 @@ class BlogListArea extends Component {
   handleSortChange = (event) => {
     const value = event.target.value;
     this.props.changeSortBy(value);
+    this.props.sortPostsList();
   }
 
   handleNewPost = () => {
@@ -33,31 +34,6 @@ class BlogListArea extends Component {
 
 
   render() { 
-    let sortedList = [];
-    switch (this.props.sortBy) {
-    case DATE_DESC:
-      sortedList = _.orderBy(this.props.posts, ['date'], ['desc'] );
-      break;
-    case DATE_ASC:
-      sortedList = _.orderBy(this.props.posts, ['date'], ['asc'] );
-      break;
-    case CATEGORY_DESC:
-      sortedList = _.orderBy(this.props.posts, ['category'], ['desc']);
-      break;
-    case CATEGORY_ASC:
-      sortedList = _.orderBy(this.props.posts, ['category'], ['asc']);
-      console.log(sortedList);
-      break;
-    case STATUS:
-      sortedList = _.orderBy(this.props.posts, ['status'], ['asc']);
-      break;
-    default:
-      sortedList = _.orderBy(this.props.posts, ['date'], ['asc']);
-      console.log('default sort');
-      break;
-    }
-
-    
 
     return (  
       <Container>
@@ -76,7 +52,7 @@ class BlogListArea extends Component {
         </Form>
         <EditPostModal />
         <DragDropContext onDragEnd={this.onDragEnd}>
-          <BlogLists sortedList={sortedList}/>
+          <BlogLists/>
         </DragDropContext>
       </Container>
     );
@@ -91,7 +67,8 @@ BlogListArea.propTypes = {
   dateRange: PropTypes.array,
   sortBy: PropTypes.string,
   clearForm: PropTypes.func,
-  getDateRange: PropTypes.func
+  getDateRange: PropTypes.func,
+  sortPostsList: PropTypes.func,
 };
 
 const mapStateToProps = (state) =>{
@@ -103,4 +80,4 @@ const mapStateToProps = (state) =>{
   };
 };
  
-export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange })(BlogListArea);
+export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange, sortPostsList })(BlogListArea);
