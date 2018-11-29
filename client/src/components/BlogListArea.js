@@ -31,8 +31,6 @@ class BlogListArea extends Component {
     console.log(result);
   };
 
-
-
   render() { 
 
     return (  
@@ -63,21 +61,13 @@ BlogListArea.propTypes = {
   setModalOpen: PropTypes.func,
   getAllPosts: PropTypes.func,
   changeSortBy : PropTypes.func,
-  posts: PropTypes.array,
-  dateRange: PropTypes.array,
-  sortBy: PropTypes.string,
   clearForm: PropTypes.func,
   getDateRange: PropTypes.func,
   sortPostsList: PropTypes.func,
 };
 
-const mapStateToProps = (state) =>{
-  const { sortBy, posts, dateRange } = state.postReducer;
-  return {
-    posts,
-    sortBy,
-    dateRange,
-  };
+const mapStateToProps = () =>{
+  return {};
 };
  
 export default connect(mapStateToProps, { getAllPosts, setModalOpen, changeSortBy, clearForm, getDateRange, sortPostsList })(BlogListArea);
