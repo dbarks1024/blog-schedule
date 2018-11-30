@@ -63,6 +63,27 @@ export const createBlogListData = () => {
   };
 };
 
+export const updatePostDate = (data) => {
+  return () => {
+    fetch(`/api/post/${data._id}`, {
+      method: 'PUT',
+      mode: 'cors', 
+      'async': true,
+      'crossDomain': true,
+      cache: 'no-cache', 
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }, 
+      body: JSON.stringify(data), 
+    })
+      .then(response => console.log(response))
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
 export const moveBlogListData = (destination, source, ) => {
   return (dispatch, getState) => {
     let blogListData = getState().blogListReducer.blogListData;
@@ -76,13 +97,15 @@ export const moveBlogListData = (destination, source, ) => {
     blogListData[sourceSectionIndex][source.droppableId].splice(source.index, 1);
     console.log(blogListData[sourceSectionIndex][source.droppableId]);
 
-    //add to destination
+    //changeDate 
+    blogToMove.date = moment(destination.droppableId, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    console.log(blogToMove);
+    // add to destination
     blogListData[destinationSectionIndex][destination.droppableId].splice(destination.index, 0, blogToMove);
-
+    dispatch(updatePostDate(blogToMove));
     dispatch({
       type: BLOG_LIST_DATA,
       payload: blogListData
     });
-    console.log(blogListData);
   };
 };

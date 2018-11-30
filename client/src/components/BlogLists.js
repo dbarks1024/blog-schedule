@@ -22,7 +22,6 @@ class BlogLists extends Component {
       return;
     }
     this.props.moveBlogListData(destination, source);
-    this.forceUpdate();
   };
 
   renderLists = ( ) => {
