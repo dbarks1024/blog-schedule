@@ -91,7 +91,9 @@ export const moveBlogListData = (destination, source, ) => {
     const sourceSection = blogListData[sourceSectionIndex][source.droppableId];
     const blogToMove = _.pullAt(sourceSection, source.index)[0];
     const destinationSectionIndex = _.findIndex(blogListData, (post) => {return Object.keys(post)[0] === destination.droppableId; });
-    console.log(blogToMove);
+
+    //send blog to update
+    dispatch(updatePostDate(blogToMove));
 
     //remove from source
     blogListData[sourceSectionIndex][source.droppableId].splice(source.index, 1);
@@ -102,7 +104,6 @@ export const moveBlogListData = (destination, source, ) => {
     console.log(blogToMove);
     // add to destination
     blogListData[destinationSectionIndex][destination.droppableId].splice(destination.index, 0, blogToMove);
-    dispatch(updatePostDate(blogToMove));
     dispatch({
       type: BLOG_LIST_DATA,
       payload: blogListData

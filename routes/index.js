@@ -36,6 +36,7 @@ router.put('/post/:id', (req, res) => {
     status: data.status,
     author: data.author,
   };
+  console.log(data);
   if (updatedPostData.title === undefined || updatedPostData.status === undefined) {
     res.send('Missing title or status');
   } else {
@@ -44,6 +45,7 @@ router.put('/post/:id', (req, res) => {
         res.send(err);
       } else {
         res.send('success');
+        console.log(updatedPostData);
       }
     });
   }
