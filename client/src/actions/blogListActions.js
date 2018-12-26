@@ -1,7 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
 import { BLOG_LIST_DATA, SORTED_POSTS_LIST } from './types';
-import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from '../components/consts'; 
+import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORIES } from '../components/consts'; 
 
 export const sortPostsList = () => {
   return (dispatch, getState) => {
@@ -43,20 +43,30 @@ export const sortPostsList = () => {
 export const createBlogListData = () => {
   return (dispatch, getState) => {
     const sortedList = getState().blogListReducer.sortedPostsList;
+    const { sortBy } = getState().postReducer;
+    let listData = [];
 
-    let listData = getState().postReducer.dateRange.map((date) =>{
-      const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
-      const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
-      const data = _.filter(sortedList, (item) => (
-        moment(item.date,).isBetween(firstDate, endDate)
-      ))
-        .map((item) => {
-          return item;
-        });   
-      return {[date]: data};
-    });
-
-    if(getState().postReducer.sortBy === 'date-desc') {
+    if(sortBy === DATE_ASC || sortBy === DATE_DESC) {
+      listData = getState().postReducer.dateRange.map((date) =>{
+        const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
+        const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
+        const data = _.filter(sortedList, (item) => (
+          moment(item.date,).isBetween(firstDate, endDate)
+        ))
+          .map((item) => {
+            return item;
+          });   
+        return {[date]: data};
+      });
+    } else if(sortBy === CATEGORY_ASC || sortBy === CATEGORY_DESC) {
+      listData = CATEGORIES.map((category) => {
+        const data = sortedList.filter((item) => {
+          return item.category === category;
+        });
+        return {[category]: data};
+      });
+    }
+    if(sortBy === DATE_DESC || sortBy === CATEGORY_DESC) {
       listData = listData.reverse();
     }
     console.log(listData);
@@ -67,7 +77,7 @@ export const createBlogListData = () => {
   };
 };
 
-export const updatePostDate = (data) => {
+export const updatePostData = (data) => {
   return () => {
     fetch(`/api/post/${data._id}`, {
       method: 'PUT',
@@ -91,6 +101,7 @@ export const updatePostDate = (data) => {
 export const moveBlogListData = (destination, source, ) => {
   return (dispatch, getState) => {
     let blogListData = getState().blogListReducer.blogListData;
+    const sortBy = getState().postReducer.sortBy;
     const sourceSectionIndex = _.findIndex(blogListData, (post) => {return Object.keys(post)[0] === source.droppableId; });
     const sourceSection = blogListData[sourceSectionIndex][source.droppableId];
     const blogToMove = _.pullAt(sourceSection, source.index)[0];
@@ -98,12 +109,15 @@ export const moveBlogListData = (destination, source, ) => {
     //remove from source
     blogListData[sourceSectionIndex][source.droppableId].splice(source.index, 1);
 
-    //changeDate 
-    blogToMove.date = moment(destination.droppableId, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    if(sortBy === DATE_ASC || sortBy === DATE_DESC) {
+      //changeDate 
+      blogToMove.date = moment(destination.droppableId, 'MM/DD/YYYY').format('YYYY-MM-DD');
+    } else if (sortBy !== DATE_ASC || sortBy !== DATE_DESC) {
+      blogToMove.category = destination.droppableId;
+    }
     console.log(blogToMove);
-
     //send blog to update
-    dispatch(updatePostDate(blogToMove));
+    dispatch(updatePostData(blogToMove));
 
     // add to destination
     blogListData[destinationSectionIndex][destination.droppableId].splice(destination.index, 0, blogToMove);

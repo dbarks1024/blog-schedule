@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 import { createBlogListData, moveBlogListData } from '../actions/blogListActions';
 import BlogListItem from './BlogListItem';
-import { DATE_ASC, DATE_DESC } from './consts';
+import { STATUS } from './consts';
 import ListSectionItem from './ListSectionItem';
 
 
@@ -28,26 +28,26 @@ class BlogLists extends Component {
   renderLists = ( ) => {
     const listData = this.props.blogListData;
     const sortedList = this.props.sortedPostsList;
-    if(this.props.sortBy === DATE_ASC || DATE_DESC){
+    if(this.props.sortBy !== STATUS){
       return listData.map((list) => {
-        const date = Object.keys(list)[0];
+        const groupName = Object.keys(list)[0];
         return(
           <div
-            key={date}
+            key={groupName}
           >
             <ListSectionItem
-              name={date}
+              name={groupName}
             />
             <Droppable
-              droppableId={date}
+              droppableId={groupName}
             >
               {provided => (
                 <ul
                   ref={provided.innerRef}
-                  key={date}
+                  key={groupName}
                   style={{minHeight: 3, paddingLeft: 0}}
                 >
-                  {list[date].map((listItem, index) => (
+                  {list[groupName].map((listItem, index) => (
                     <Draggable
                       key={listItem._id}
                       draggableId={listItem._id}
