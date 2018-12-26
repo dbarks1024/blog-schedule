@@ -1,7 +1,7 @@
 import moment from 'moment';
 import _ from 'lodash';
 import { BLOG_LIST_DATA, SORTED_POSTS_LIST } from './types';
-import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORIES } from '../components/consts'; 
+import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS } from '../components/consts'; 
 
 export const sortPostsList = () => {
   return (dispatch, getState) => {
@@ -59,11 +59,18 @@ export const createBlogListData = () => {
         return {[date]: data};
       });
     } else if(sortBy === CATEGORY_ASC || sortBy === CATEGORY_DESC) {
-      listData = CATEGORIES.map((category) => {
+      listData = CATEGORY_OPTIONS.map((category) => {
         const data = sortedList.filter((item) => {
           return item.category === category;
         });
         return {[category]: data};
+      });
+    } else if(sortBy === STATUS) {
+      listData = STATUS_OPTIONS.map((status) => {
+        const data = sortedList.filter((item) => {
+          return item.status === status;
+        });
+        return {[status]: data};
       });
     }
     if(sortBy === DATE_DESC || sortBy === CATEGORY_DESC) {
@@ -112,8 +119,10 @@ export const moveBlogListData = (destination, source, ) => {
     if(sortBy === DATE_ASC || sortBy === DATE_DESC) {
       //changeDate 
       blogToMove.date = moment(destination.droppableId, 'MM/DD/YYYY').format('YYYY-MM-DD');
-    } else if (sortBy !== DATE_ASC || sortBy !== DATE_DESC) {
+    } else if (sortBy === CATEGORY_ASC || sortBy === CATEGORY_DESC) {
       blogToMove.category = destination.droppableId;
+    } else if (sortBy === STATUS) {
+      blogToMove.status = destination.droppableId;
     }
     console.log(blogToMove);
     //send blog to update

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 import { createBlogListData, moveBlogListData } from '../actions/blogListActions';
 import BlogListItem from './BlogListItem';
-import { STATUS } from './consts';
 import ListSectionItem from './ListSectionItem';
 
 
@@ -27,55 +26,51 @@ class BlogLists extends Component {
 
   renderLists = ( ) => {
     const listData = this.props.blogListData;
-    const sortedList = this.props.sortedPostsList;
-    if(this.props.sortBy !== STATUS){
-      return listData.map((list) => {
-        const groupName = Object.keys(list)[0];
-        return(
-          <div
-            key={groupName}
+    return listData.map((list) => {
+      const groupName = Object.keys(list)[0];
+      return(
+        <div
+          key={groupName}
+        >
+          <ListSectionItem
+            name={groupName}
+          />
+          <Droppable
+            droppableId={groupName}
           >
-            <ListSectionItem
-              name={groupName}
-            />
-            <Droppable
-              droppableId={groupName}
-            >
-              {provided => (
-                <ul
-                  ref={provided.innerRef}
-                  key={groupName}
-                  style={{minHeight: 3, paddingLeft: 0}}
-                >
-                  {list[groupName].map((listItem, index) => (
-                    <Draggable
-                      key={listItem._id}
-                      draggableId={listItem._id}
-                      index={index}
-                    >
-                      {provided => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <BlogListItem 
-                            item={listItem}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>          
-          </div>
-        );
-      }
+            {provided => (
+              <ul
+                ref={provided.innerRef}
+                key={groupName}
+                style={{minHeight: 3, paddingLeft: 0}}
+              >
+                {list[groupName].map((listItem, index) => (
+                  <Draggable
+                    key={listItem._id}
+                    draggableId={listItem._id}
+                    index={index}
+                  >
+                    {provided => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <BlogListItem 
+                          item={listItem}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>          
+        </div>
       );
-    } 
-    return sortedList.map((item) => <BlogListItem key={item._id} item={item}/>);
+    }
+    );
   };
 
   render() { 
@@ -90,11 +85,10 @@ class BlogLists extends Component {
 }
  
 const mapStateToProps = (state) =>{
-  const { blogListData, sortedPostsList } = state.blogListReducer;
+  const { blogListData } = state.blogListReducer;
   const { sortBy } = state.postReducer;
   return {
     blogListData,
-    sortedPostsList,
     sortBy,
   };
 };
