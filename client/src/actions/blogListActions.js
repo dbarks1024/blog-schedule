@@ -44,7 +44,7 @@ export const createBlogListData = () => {
   return (dispatch, getState) => {
     const sortedList = getState().blogListReducer.sortedPostsList;
 
-    const listData = getState().postReducer.dateRange.map((date) =>{
+    let listData = getState().postReducer.dateRange.map((date) =>{
       const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
       const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
       const data = _.filter(sortedList, (item) => (
@@ -55,6 +55,10 @@ export const createBlogListData = () => {
         });   
       return {[date]: data};
     });
+
+    if(getState().postReducer.sortBy === 'date-desc') {
+      listData = listData.reverse();
+    }
     console.log(listData);
     dispatch({
       type: BLOG_LIST_DATA,

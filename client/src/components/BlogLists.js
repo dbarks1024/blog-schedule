@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
 import { createBlogListData, moveBlogListData } from '../actions/blogListActions';
 import BlogListItem from './BlogListItem';
-import { DATE_ASC } from './consts';
+import { DATE_ASC, DATE_DESC } from './consts';
 import ListSectionItem from './ListSectionItem';
 
 
@@ -28,7 +28,7 @@ class BlogLists extends Component {
   renderLists = ( ) => {
     const listData = this.props.blogListData;
     const sortedList = this.props.sortedPostsList;
-    if(this.props.sortBy === DATE_ASC){
+    if(this.props.sortBy === DATE_ASC || DATE_DESC){
       return listData.map((list) => {
         const date = Object.keys(list)[0];
         return(
