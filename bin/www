@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const path = require('path');
 /**
  * Module dependencies.
  */
@@ -7,6 +7,15 @@
 var app = require('../app');
 var debug = require('debug')('blog-schedule-backend:server');
 var http = require('http');
+
+//serve static assets if in prod
+if(process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 /**
  * Get port from environment and store in Express.
