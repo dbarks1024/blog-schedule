@@ -6,7 +6,7 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   indexRouter = require('./routes/index');
 
-var databaseUrl = process.env.DATABASEURL || 'mongodb://localhost/blog-schedule';
+var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost/blog-schedule';
 
 
 var app = express();
