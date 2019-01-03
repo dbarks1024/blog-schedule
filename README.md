@@ -1,6 +1,8 @@
 # blog-schedule
 App to schedule blog posts
 
+## Backend
+
 ## Quick Start
 1. npm install
 2. npm run dev

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavBar from './components/AppNavBar';
-import BlogList from './components/BlogList';
+import BlogListArea from './components/BlogListArea';
 
 class App extends Component {
   render() {
@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <AppNavBar/>
         <div className='container'>
-          <BlogList/>
+          <BlogListArea/>
         </div>
         
       </div>

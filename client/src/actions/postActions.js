@@ -1,5 +1,6 @@
-import { ALL_POSTS, MODAL_OPEN, SORT_BY, DATE_RANGE } from './types';
 import moment from 'moment';
+import { ALL_POSTS, MODAL_OPEN, SORT_BY, DATE_RANGE } from './types';
+import { sortPostsList } from './blogListActions';
 
 export const getAllPosts = () => {
   return (dispatch) => {
@@ -17,6 +18,7 @@ export const getAllPosts = () => {
           payload: response,
           type: ALL_POSTS
         });
+        dispatch(sortPostsList());
       }); 
   };
 };

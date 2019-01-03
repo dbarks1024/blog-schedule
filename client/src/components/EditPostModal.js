@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
 import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost, clearForm } from '../actions/changePostFormActions';
 import LoadingSpinner from './spinner/LoadingSpinner';
+import { STATUS_OPTIONS, CATEGORY_OPTIONS } from './consts';
 
 class EditPostModal extends Component {
 
@@ -63,8 +64,18 @@ class EditPostModal extends Component {
 
   renderDelete = () => {
     if(this.props.id) {
-      return <Button className='warning' type='submit' onClick={this.handleDelete}>Delete</Button>;
+      return <Button className='btn-danger ml-3' onClick={this.handleDelete}>Delete</Button>;
     }
+  }
+  
+  renderOptions(options) {
+    console.log(options);
+    return options.map((item) => {
+      console.log(item);
+      return (
+        <option key={item}>{item}</option>
+      );
+    });
   }
 
   render() { 
@@ -91,32 +102,21 @@ class EditPostModal extends Component {
               <Label for='status'>Status</Label>
               <Input type='select' id='status' name='status' value={this.props.status} required onChange={this.handleInputChange}>
                 <option disabled selected value=''> -- select an option -- </option>
-                <option>Not Started</option>
-                <option>Drafting</option>
-                <option>Review</option>
-                <option>Ready</option>
-                <option>Posted</option>
+                {this.renderOptions(STATUS_OPTIONS)}
               </Input>
             </FormGroup>
             <FormGroup>
               <Label for='category'>Category</Label>
               <Input type='select' id='category' name='category' value={this.props.category} required onChange={this.handleInputChange} >
                 <option disabled selected value=''> -- select an option -- </option>
-                <option>Android</option>
-                <option>Back-End</option>
-                <option>Clients</option>
-                <option>Design</option>
-                <option>iOS</option>
-                <option>Front-End</option>
-                <option>Leadership</option>
-                <option>Mac</option>
+                {this.renderOptions(CATEGORY_OPTIONS)}
               </Input>
             </FormGroup>
             <FormGroup>
               <Label for='description'>Description</Label>
               <Input type='textarea' id='description' name='description' value={this.props.description} required onChange={this.handleInputChange}></Input>
             </FormGroup>
-            <Button type='submit' onClick={this.handleSubmit}>
+            <Button onClick={this.handleSubmit}>
               {this.isLoading()}
             </Button>
             {this.renderDelete()}
