@@ -1,13 +1,12 @@
 import React, {
   Component
 } from 'react';
+import { Link } from  'react-router-dom';
 import {
   Collapse,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   Container,
   Navbar
 } from 'reactstrap';
@@ -32,14 +31,14 @@ class AppNavBar extends Component {
       <div>
         <Navbar color="dark" dark expand="sm" className="mb-5">
           <Container>
-            <NavbarBrand href="/">
+            <Link className='navbar-brand' to="/">
               Blog Schedule
-            </NavbarBrand>
+            </Link>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar > 
               <Nav className='ml-auto' navbar>
                 <NavItem>
-                  <NavLink href='/'>Test</NavLink>
+                  <Link className='nav-link' to={'/address'}>Test</Link>
                 </NavItem>
               </Nav>
             </Collapse>
