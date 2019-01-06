@@ -14,3 +14,4 @@ export const DATE_RANGE = 'date_range';
 export const BLOG_LIST_DATA = 'blog_list_data';
 export const SORTED_POSTS_LIST = 'sorted_posts_list';
 export const CHANGE_WEEKS_PAST = 'change_weeks_past';
+export const CHANGE_WEEKS_FUTURE = 'change_weeks_future';
