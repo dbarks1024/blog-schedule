@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavBar from './components/AppNavBar';
 import BlogListArea from './components/BlogListArea';
+import Settings from './components/settings/Settings';
 
 class App extends Component {
   render() {
@@ -14,14 +15,12 @@ class App extends Component {
           <AppNavBar/>
           <div className='container'>
             <Route exact path='/' component={BlogListArea} />
-            <Route path='/address' component={Address} />
+            <Route path='/settings' component={Settings} />
           </div>  
         </div>    
       </Router> 
     );
   }
 }
-
-const Address = () => <h1>We are located at 555 Jackson St.</h1>;
 
 export default connect(null, {})(App);
