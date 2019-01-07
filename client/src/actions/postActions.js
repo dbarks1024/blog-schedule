@@ -38,19 +38,22 @@ export const changeSortBy = (type) => {
 };
 
 export const getDateRange = () => {
-  const currentTuesday =  moment().day('tuesday');
-  const weeksAfter = 12;
-  const weeksBefore = 5;
-  const firstTuesday = (moment(currentTuesday).subtract(weeksBefore, 'week') );
-  const totalWeeks = weeksAfter + weeksBefore;
-
-  let datesArray = [];
-
-  for (let i = 0; i < totalWeeks + 1 ; i++) {
-    datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYYY'));
-  }
-  return {
-    type: DATE_RANGE,
-    payload: datesArray
+  return (dispatch, getState) => {
+    const currentTuesday =  moment().day('tuesday');
+    const weeksFuture = Number(getState().settings.weeksFuture);
+    const weeksPast = Number(getState().settings.weeksPast);
+    const firstTuesday = (moment(currentTuesday).subtract(weeksPast, 'week') );
+    const totalWeeks = weeksFuture + weeksPast;
+    
+    let datesArray = [];
+    console.log(totalWeeks);
+    for (let i = 0; i <= totalWeeks - 1; i++) {
+      datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYYY'));
+    }
+    console.log(datesArray);
+    dispatch({
+      type: DATE_RANGE,
+      payload: datesArray
+    }); 
   };
 };
