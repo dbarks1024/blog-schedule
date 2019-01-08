@@ -46,11 +46,9 @@ export const getDateRange = () => {
     const totalWeeks = weeksFuture + weeksPast;
     
     let datesArray = [];
-    console.log(totalWeeks);
     for (let i = 0; i <= totalWeeks - 1; i++) {
       datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYYY'));
     }
-    console.log(datesArray);
     dispatch({
       type: DATE_RANGE,
       payload: datesArray
