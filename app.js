@@ -4,7 +4,9 @@ const express = require('express'),
   logger = require('morgan'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
-  indexRouter = require('./routes/index');
+  indexRouter = require('./routes/index'),
+  requestRouter = require('./routes/request');
+
 
 var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost/blog-schedule';
 
@@ -24,6 +26,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
+app.use('/api', requestRouter);
+
 
 //serve static assets if in prod
 if(process.env.NODE_ENV === 'production') {
