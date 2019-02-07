@@ -10,7 +10,7 @@ import {
   MODAL_OPEN,
   CLEAR_FORM,
 } from '../actions/types';
-import { getAllPosts } from '../actions/postActions';
+import { getAllPosts } from '../blogList/_actions';
 
 
 export const changePostFormData = (post) => {

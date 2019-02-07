@@ -1,7 +1,28 @@
 import moment from 'moment';
 import _ from 'lodash';
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE, ALL_POSTS } from '../actions/types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS } from '../consts'; 
+
+export const getAllPosts = () => {
+  return (dispatch) => {
+    fetch('/api/post', {cache: 'no-cache'})
+      .then((response) => response.json())
+      .then((response) => {
+        return response.map((post) => {
+          post.date = moment(post.date).format('YYYY-MM-DD');
+          return post;
+        });
+      })
+      .then((response) => {
+        console.log(response);
+        dispatch({
+          payload: response,
+          type: ALL_POSTS
+        });
+        dispatch(sortPostsList());
+      }); 
+  };
+};
 
 export const sortPostsList = () => {
   return (dispatch, getState) => {
