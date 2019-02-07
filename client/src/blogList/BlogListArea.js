@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../actions/postActions';
 import { sortPostsList } from './_actions';
-import { clearForm } from '../actions/changePostFormActions';
+import { clearForm } from '../postForm/_actions';
 import BlogLists from './BlogLists';
-import EditPostModal from '../components/EditPostModal';
+import EditPostModal from '../postForm/EditPostModal';
 
 class BlogListArea extends Component {
   
