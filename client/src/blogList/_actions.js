@@ -1,6 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE, ALL_POSTS, MODAL_OPEN } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE, ALL_POSTS, MODAL_OPEN, SORT_BY} from '../actions/types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS } from '../consts'; 
 
 export const getAllPosts = () => {
@@ -59,6 +59,13 @@ export const sortPostsList = () => {
     });
     dispatch(createBlogListData());
   };
+};
+
+export const changeSortBy = (type) => {
+  return {
+    type: SORT_BY,
+    payload: type
+  }; 
 };
 
 export const createBlogListData = () => {
