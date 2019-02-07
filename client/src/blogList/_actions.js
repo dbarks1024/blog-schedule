@@ -75,7 +75,7 @@ export const createBlogListData = () => {
     let listData = [];
 
     if(sortBy === DATE_ASC || sortBy === DATE_DESC) {
-      listData = getState().postReducer.dateRange.map((date) =>{
+      listData = getState().blogListReducer.dateRange.map((date) =>{
         const firstDate = moment(date, 'MM/DD/YYYY').subtract(1, 'day');
         const endDate = moment(date, 'MM/DD/YYYY').add(7, 'day');
         const data = _.filter(sortedList, (item) => (

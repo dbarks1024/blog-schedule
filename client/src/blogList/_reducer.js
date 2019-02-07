@@ -1,4 +1,4 @@
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST, ALL_POSTS, SORT_BY } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, ALL_POSTS, SORT_BY, DATE_RANGE } from '../actions/types';
 import { DATE_ASC } from '../consts';
 
 const INITIAL_STATE = {
@@ -30,6 +30,11 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state,
       sortedPostsList: action.payload
+    };
+  case DATE_RANGE:
+    return {
+      ...state,
+      dateRange: action.payload
     };
   default:
     return state;
