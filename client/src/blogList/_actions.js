@@ -1,6 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE } from '../actions/types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS } from '../consts'; 
 
 export const sortPostsList = () => {
@@ -134,5 +134,24 @@ export const moveBlogListData = (destination, source, ) => {
       type: BLOG_LIST_DATA,
       payload: blogListData
     });
+  };
+};
+
+export const getDateRange = () => {
+  return (dispatch, getState) => {
+    const currentTuesday =  moment().day('tuesday');
+    const weeksFuture = Number(getState().settings.weeksFuture);
+    const weeksPast = Number(getState().settings.weeksPast);
+    const firstTuesday = (moment(currentTuesday).subtract(weeksPast, 'week') );
+    const totalWeeks = weeksFuture + weeksPast;
+    
+    let datesArray = [];
+    for (let i = 0; i <= totalWeeks - 1; i++) {
+      datesArray.push(moment(firstTuesday).add(i, 'week').format('MM/DD/YYYY'));
+    }
+    dispatch({
+      type: DATE_RANGE,
+      payload: datesArray
+    }); 
   };
 };
