@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import postReducer from './post';
 import changePostForm from './changePostForm';
 import blogListReducer from '../blogList/_reducers';
-import settings from './settings';
+import settings from '../settings/_reducer';
 
 export default combineReducers({
   postReducer,

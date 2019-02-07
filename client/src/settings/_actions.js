@@ -1,4 +1,4 @@
-import { CHANGE_WEEKS_PAST, CHANGE_WEEKS_FUTURE } from './types';
+import { CHANGE_WEEKS_PAST, CHANGE_WEEKS_FUTURE } from '../actions/types';
 
 export const changeWeeksPast =  (val) => {
   if(!isNaN(val) && val.length <= 2 ) {

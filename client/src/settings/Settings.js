@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
-import { changeWeeksPast, changeWeeksFuture } from '../../actions/settingsActions';
+import { changeWeeksPast, changeWeeksFuture } from './_actions';
 
 class Settings extends Component {
   onChangeWeeksPast = (event) => {
