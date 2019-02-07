@@ -6,6 +6,7 @@ import AppNavBar from './components/AppNavBar';
 import BlogListArea from './blogList/BlogListArea';
 import Settings from './settings/Settings';
 import RequestsList from './requests/RequestsList';
+import SubmitRequest from './submitRequests/SubmitRequest';
 
 class App extends Component {
   render() {
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path='/' component={BlogListArea} />
             <Route path='/settings' component={Settings} />
             <Route path='/requests' component={RequestsList} />
+            <Route path='/request' component={SubmitRequest} />
           </div>  
         </div>    
       </Router> 
