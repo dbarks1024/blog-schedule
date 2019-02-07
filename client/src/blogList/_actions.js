@@ -1,6 +1,6 @@
 import moment from 'moment';
 import _ from 'lodash';
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE, ALL_POSTS } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, DATE_RANGE, ALL_POSTS, MODAL_OPEN } from '../actions/types';
 import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS, CATEGORY_OPTIONS, STATUS_OPTIONS } from '../consts'; 
 
 export const getAllPosts = () => {
@@ -174,5 +174,12 @@ export const getDateRange = () => {
       type: DATE_RANGE,
       payload: datesArray
     }); 
+  };
+};
+
+export const setModalOpen = (bool) => {
+  return {
+    type: MODAL_OPEN,
+    payload: bool
   };
 };
