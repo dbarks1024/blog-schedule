@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from './consts'; 
+import { DATE_DESC, DATE_ASC, CATEGORY_ASC, CATEGORY_DESC, STATUS } from '../consts'; 
 import { connect } from 'react-redux';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
 import { changeSortBy, getAllPosts, setModalOpen, getDateRange } from '../actions/postActions';
-import { sortPostsList } from '../actions/blogListActions';
+import { sortPostsList } from './_actions';
 import { clearForm } from '../actions/changePostFormActions';
 import BlogLists from './BlogLists';
-import EditPostModal from './EditPostModal';
+import EditPostModal from '../components/EditPostModal';
 
 class BlogListArea extends Component {
   

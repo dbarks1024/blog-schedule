@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { connect } from 'react-redux';
 import { ListGroup } from 'reactstrap';
-import { createBlogListData, moveBlogListData } from '../actions/blogListActions';
+import { createBlogListData, moveBlogListData } from './_actions';
 import BlogListItem from './BlogListItem';
 import ListSectionItem from './ListSectionItem';
 

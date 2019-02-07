@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setModalOpen } from '../actions/postActions';
 import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost, clearForm } from '../actions/changePostFormActions';
 import LoadingSpinner from './spinner/LoadingSpinner';
-import { STATUS_OPTIONS, CATEGORY_OPTIONS } from './consts';
+import { STATUS_OPTIONS, CATEGORY_OPTIONS } from '../consts';
 
 class EditPostModal extends Component {
 

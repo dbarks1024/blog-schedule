@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import AppNavBar from './components/AppNavBar';
-import BlogListArea from './components/BlogListArea';
+import BlogListArea from './blogList/BlogListArea';
 import Settings from './components/settings/Settings';
 
 class App extends Component {

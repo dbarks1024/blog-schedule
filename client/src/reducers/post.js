@@ -1,5 +1,5 @@
 import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY, DATE_RANGE } from '../actions/types';
-import { DATE_ASC } from '../components/consts';
+import { DATE_ASC } from '../consts';
 
 const INITIAL_STATE = {
   posts: [],

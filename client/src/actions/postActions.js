@@ -1,6 +1,6 @@
 import moment from 'moment';
 import { ALL_POSTS, MODAL_OPEN, SORT_BY, DATE_RANGE } from './types';
-import { sortPostsList } from './blogListActions';
+import { sortPostsList } from '../blogList/_actions';
 
 export const getAllPosts = () => {
   return (dispatch) => {
