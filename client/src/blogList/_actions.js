@@ -27,7 +27,7 @@ export const getAllPosts = () => {
 export const sortPostsList = () => {
   return (dispatch, getState) => {
     let sortedList = [];
-    const sortBy = getState().postReducer.sortBy;
+    const sortBy = getState().blogListReducer.sortBy;
     const posts = getState().blogListReducer.posts;
 
     switch (sortBy) {
@@ -71,7 +71,7 @@ export const changeSortBy = (type) => {
 export const createBlogListData = () => {
   return (dispatch, getState) => {
     const sortedList = getState().blogListReducer.sortedPostsList;
-    const { sortBy } = getState().postReducer;
+    const { sortBy } = getState().blogListReducer;
     let listData = [];
 
     if(sortBy === DATE_ASC || sortBy === DATE_DESC) {
@@ -136,7 +136,7 @@ export const updatePostData = (data) => {
 export const moveBlogListData = (destination, source, ) => {
   return (dispatch, getState) => {
     let blogListData = getState().blogListReducer.blogListData;
-    const sortBy = getState().postReducer.sortBy;
+    const sortBy = getState().blogListReducer.sortBy;
     const sourceSectionIndex = _.findIndex(blogListData, (post) => {return Object.keys(post)[0] === source.droppableId; });
     const sourceSection = blogListData[sourceSectionIndex][source.droppableId];
     const blogToMove = _.pullAt(sourceSection, source.index)[0];
