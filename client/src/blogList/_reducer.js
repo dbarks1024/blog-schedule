@@ -1,4 +1,4 @@
-import { BLOG_LIST_DATA, SORTED_POSTS_LIST } from '../actions/types';
+import { BLOG_LIST_DATA, SORTED_POSTS_LIST, ALL_POSTS } from '../actions/types';
 
 const INITIAL_STATE = {
   blogListData: [],
@@ -11,6 +11,11 @@ export default (state = INITIAL_STATE, action) => {
     return {
       ...state, 
       blogListData: action.payload
+    };
+  case ALL_POSTS:
+    return {
+      ...state, 
+      posts: action.payload
     };
   case SORTED_POSTS_LIST:
     return {

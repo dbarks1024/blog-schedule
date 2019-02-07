@@ -28,7 +28,7 @@ export const sortPostsList = () => {
   return (dispatch, getState) => {
     let sortedList = [];
     const sortBy = getState().postReducer.sortBy;
-    const posts = getState().postReducer.posts;
+    const posts = getState().blogListReducer.posts;
 
     switch (sortBy) {
     case DATE_DESC:

@@ -1,4 +1,4 @@
-import { ALL_POSTS, MODAL_OPEN, CHANGE_POST_DATA, SORT_BY, DATE_RANGE } from '../actions/types';
+import { CHANGE_POST_DATA, SORT_BY, DATE_RANGE } from '../actions/types';
 import { DATE_ASC } from '../consts';
 
 const INITIAL_STATE = {
@@ -10,12 +10,7 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case ALL_POSTS:
-    return {
-      ...state, 
-      posts: action.payload
-    };
- 
+
   case CHANGE_POST_DATA:
     return {
       ...state,
