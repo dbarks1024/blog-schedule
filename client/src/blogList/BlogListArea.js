@@ -43,7 +43,7 @@ class BlogListArea extends Component {
             </Input>
           </FormGroup>
         </Form>
-        <EditPostModal setModalOpen={this.props.setModalOpen} />
+        <EditPostModal setModalOpen={this.props.setModalOpen} clearForm={this.props.clearForm} />
         <BlogLists/>
       </Container>
     );

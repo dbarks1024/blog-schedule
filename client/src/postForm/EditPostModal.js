@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost, clearForm } from './_actions';
+import { changeTitle, changeAuthor, changeStatus, changeCategory, changeDescription, changeDate, submitPostForm, deletePost } from './_actions';
 import LoadingSpinner from '../components/spinner/LoadingSpinner';
 import { STATUS_OPTIONS, CATEGORY_OPTIONS } from '../consts';
 
@@ -173,5 +173,4 @@ export default connect(mapStateToProps,
     changeDate,
     submitPostForm,
     deletePost,
-    clearForm,
   })(EditPostModal);
