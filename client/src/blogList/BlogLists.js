@@ -6,7 +6,6 @@ import { createBlogListData, moveBlogListData } from './_actions';
 import BlogListItem from './BlogListItem';
 import ListSectionItem from './ListSectionItem';
 
-
 class BlogLists extends Component {
   onDragEnd = result => {
     console.log(result);

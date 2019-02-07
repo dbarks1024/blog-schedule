@@ -24,7 +24,7 @@ class BlogListArea extends Component {
     return (  
       <Container>
         <Button className='mb-3' onClick={this.handleNewPost}>New Post</Button>
-        <SortByForm />
+        <SortByForm/>
         <EditPostModal setModalOpen={this.props.setModalOpen} clearForm={this.props.clearForm} />
         <BlogLists/>
       </Container>
