@@ -3,7 +3,6 @@ import { DATE_ASC } from '../consts';
 
 const INITIAL_STATE = {
   posts: [],
-  modalOpen: false,
   changePostData: {},
   sortBy: DATE_ASC,
   dateRange: []
@@ -16,11 +15,7 @@ export default (state = INITIAL_STATE, action) => {
       ...state, 
       posts: action.payload
     };
-  case MODAL_OPEN:
-    return {
-      ...state,
-      modalOpen: action.payload
-    };
+ 
   case CHANGE_POST_DATA:
     return {
       ...state,

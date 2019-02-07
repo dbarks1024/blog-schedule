@@ -7,7 +7,8 @@ import {
   CHANGE_DESCRIPTION,
   CHANGE_DATE,
   FORM_LOADING,
-  CLEAR_FORM
+  CLEAR_FORM,
+  MODAL_OPEN
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ const INITIAL_STATE = {
   description: '',
   id: '',
   loading: false,
+  modalOpen: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -79,6 +81,11 @@ export default (state = INITIAL_STATE, action) => {
       category: '',
       description: '',
       id: '',
+    };
+  case MODAL_OPEN:
+    return {
+      ...state,
+      modalOpen: action.payload
     };
   default:
     return state;

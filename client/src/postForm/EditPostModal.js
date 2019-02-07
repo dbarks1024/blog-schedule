@@ -149,7 +149,7 @@ EditPostModal.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const { modalOpen } = state.postReducer;
+  const { modalOpen } = state.postForm;
   const { title, author, date, status, category, description, id, loading } = state.postForm;
   return {
     modalOpen,
