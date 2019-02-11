@@ -30,7 +30,6 @@ class EditPostModal extends Component {
     }
   }
 
-
   render() { 
     const { modalOpen } = this.props;
     const closeBtn = <button className="close" style={{ position: 'absolute', top: '15px', right: '15px' }} onClick={this.handleModalClose}>&times;</button>;

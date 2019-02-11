@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { setModalOpen } from '../blogList/_actions';
-import { changePostFormData } from '../postForm/_actions';
+import { changePostFormData } from '../postModal/_actions';
 import 'uiw-iconfont/fonts/w-icon.css'; 
 import './BlogListItem.css';
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Container } from 'reactstrap';
 import { sortPostsList, getDateRange, getAllPosts, setModalOpen, } from './_actions';
-import { clearForm } from '../postForm/_actions';
+import { clearForm } from '../postModal/_actions';
 import BlogLists from './BlogLists';
-import EditPostModal from '../postForm/EditPostModal';
+import EditPostModal from '../postModal/EditPostModal';
 import SortByForm from './SortByForm';
 
 class BlogListArea extends Component {
