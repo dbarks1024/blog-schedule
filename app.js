@@ -5,7 +5,8 @@ const express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'),
   indexRouter = require('./routes/index'),
-  requestRouter = require('./routes/request');
+  requestRouter = require('./routes/request'),
+  usersRouter = require('./routes/users');
 
 
 var databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost/blog-schedule';
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api', indexRouter);
 app.use('/api', requestRouter);
+app.use('/api', usersRouter);
 
 
 //serve static assets if in prod
